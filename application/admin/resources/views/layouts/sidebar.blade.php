@@ -33,7 +33,7 @@ $collapse_id = 0;
 
         @foreach ($navigation as $key => $nav)  
         @if (!isset($nav['subnav']))
-        <li><a href="{{ route($nav['url']) }}"><em class="fa {{$nav['icon']}}">&nbsp;</em> {{$nav['name']}}</a></li>
+        <li><a href="{{ url($nav['url']) }}"><em class="fa {{$nav['icon']}}">&nbsp;</em> {{$nav['name']}}</a></li>
         @else
         <li class="parent">
             <a data-toggle="collapse" href="#sub-item-{{$key}}">
@@ -48,7 +48,7 @@ $collapse_id = 0;
                 @foreach($nav['subnav'] as $subnav)
 
 
-                <li><a class="" href="{{ route($subnav['url']) }}">
+                <li><a class="" href="{{ url($subnav['url']) }}">
                         <span class="fa fa-arrow-right">&nbsp;</span> 
                         {{$subnav['name']}}
                     </a></li>
