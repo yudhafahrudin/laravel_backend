@@ -13,7 +13,7 @@ return [
         'category' => [
             'name' => 'Category',
             'icon' => 'fa-tags',
-            'url' => 'login',
+            'url' => 'categories',
         ],
         'user' => [
             'name' => 'User',
@@ -23,16 +23,6 @@ return [
                     'name' => 'User',
                     'icon' => '',
                     'url' => 'user',
-                ],
-                'group' => [
-                    'name' => 'Group',
-                    'icon' => '',
-                    'url' => 'login',
-                ],
-                'role_group' => [
-                    'name' => 'Role Group',
-                    'icon' => '',
-                    'url' => 'login',
                 ],
             ],
         ],
