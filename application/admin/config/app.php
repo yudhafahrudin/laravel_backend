@@ -127,8 +127,6 @@ return [
         Illuminate\Translation\TranslationServiceProvider::class,
         Illuminate\Validation\ValidationServiceProvider::class,
         Illuminate\View\ViewServiceProvider::class,
-        Prettus\Repository\Providers\RepositoryServiceProvider::class,
-        Spatie\Permission\PermissionServiceProvider::class,
         /*
          * Package Service Providers...
          */
@@ -141,6 +139,13 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+        
+        // For Repositories 
+        Prettus\Repository\Providers\RepositoryServiceProvider::class,        // For Repositories  Binding
+        App\Providers\RepositoryServiceProvider::class,        // For Repositories  Binding
+        
+        // For Permission Level
+        Spatie\Permission\PermissionServiceProvider::class,
     ],
     /*
       |--------------------------------------------------------------------------
