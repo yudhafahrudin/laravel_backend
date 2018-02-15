@@ -16,11 +16,11 @@
             
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Register for new user
+                    Add Categories
 
                      <span class="pull-right">
-                        <a class="btn btn-success" href='{{route('user')}}'>
-                            List User
+                        <a class="btn btn-success" href='{{url('categories')}}'>
+                            List Categories
                         </a>
                     </span> 
                 </div>
@@ -31,18 +31,19 @@
                             <div class="card card-default">
 
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('register') }}">
+                                    <form method="POST" action="{{ route('categories.update', ['category' => $category->id]) }}">
+                                        <input name="_method" type="hidden" value="PUT">
                                         @csrf
 
                                         <div class="form-group row">
-                                            <label for="username" class="col-md-2 col-form-label text-md-right">Username</label>
+                                            <label for="code" class="col-md-2 col-form-label text-md-right">Code</label>
 
                                             <div class="col-md-10">
-                                                <input id="username" type="text" class="form-control{{ $errors->has('username') ? ' is-invalid' : '' }}" name="username" value="{{ old('username') }}" required autofocus>
+                                                <input id="code" type="text" class="form-control{{ $errors->has('code') ? ' is-invalid' : '' }}" name="code" value="{{ $category->code}}" disabled required autofocus>
 
-                                                @if ($errors->has('username'))
+                                                @if ($errors->has('code'))
                                                 <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('username') }}</strong>
+                                                    <strong>{{ $errors->first('code') }}</strong>
                                                 </span>
                                                 @endif
                                             </div>
@@ -51,7 +52,7 @@
                                             <label for="name" class="col-md-2 col-form-label text-md-right">Name</label>
 
                                             <div class="col-md-10">
-                                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ old('name') }}" autofocus>
+                                                <input id="name" type="text" class="form-control{{ $errors->has('name') ? ' is-invalid' : '' }}" name="name" value="{{ $category->name }}" autofocus>
 
                                                 @if ($errors->has('name'))
                                                 <span class="invalid-feedback">
@@ -60,47 +61,25 @@
                                                 @endif
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
-                                            <label for="email" class="col-md-2 col-form-label text-md-right">E-Mail Address</label>
+                                            <label for="description" class="col-md-2 col-form-label text-md-right">Description</label>
 
                                             <div class="col-md-10">
-                                                <input id="email" type="email" class="form-control{{ $errors->has('email') ? ' is-invalid' : '' }}" name="email" value="{{ old('email') }}" required>
+                                                <textarea rows="8" id="description" class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description"> {{$category->description}}</textarea>
 
-                                                @if ($errors->has('email'))
+                                                @if ($errors->has('description'))
                                                 <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('email') }}</strong>
+                                                    <strong>{{ $errors->first('description') }}</strong>
                                                 </span>
                                                 @endif
                                             </div>
                                         </div>
-
-                                        <div class="form-group row">
-                                            <label for="password" class="col-md-2 col-form-label text-md-right">Password</label>
-
-                                            <div class="col-md-10">
-                                                <input id="password" type="password" class="form-control{{ $errors->has('password') ? ' is-invalid' : '' }}" name="password" required>
-
-                                                @if ($errors->has('password'))
-                                                <span class="invalid-feedback">
-                                                    <strong>{{ $errors->first('password') }}</strong>
-                                                </span>
-                                                @endif
-                                            </div>
-                                        </div>
-
-                                        <div class="form-group row">
-                                            <label for="password-confirm" class="col-md-2 col-form-label text-md-right">Confirm Password</label>
-
-                                            <div class="col-md-10">
-                                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
-                                            </div>
-                                        </div>
+                                       
 
                                         <div class="form-group row mb-0">
                                             <div class="col-md-6 offset-md-4">
                                                 <button type="submit" class="btn btn-primary">
-                                                    Register
+                                                    Save 
                                                 </button>
                                             </div>
                                         </div>
