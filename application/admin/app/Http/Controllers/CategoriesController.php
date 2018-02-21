@@ -9,6 +9,7 @@ use Prettus\Validator\Exceptions\ValidatorException;
 use App\Http\Requests\CategorieCreateRequest;
 use App\Http\Requests\CategorieUpdateRequest;
 use App\Repositories\CategorieRepository;
+use App\Repositories\CategorieRepositoryEloquent;
 use App\Validators\CategorieValidator;
 use Illuminate\Support\Facades\Auth;
 
@@ -22,18 +23,19 @@ class CategoriesController extends Controller {
     protected $repository;
     protected $validator;
 
-    public function __construct(CategorieRepository $repository, CategorieValidator $validator) {
+    public function __construct(CategorieRepositoryEloquent $repository, CategorieValidator $validator) {
         parent::__construct();
         $this->repository = $repository;
         $this->validator = $validator;
     }
+    
 
     public function index() {
-        
+
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $this->repository->pushCriteria(\App\Criteria\MyDefaultCriteria::class);
-
         $categories = $this->repository->all()->sortByDesc('id');
+        
         $categories_deleted = $this->repository->skipCriteria()->findWhereNotIn('status', [1]);
         $categories_total = count($categories);
         $categories_deleted_total = count($categories_deleted);
@@ -51,7 +53,7 @@ class CategoriesController extends Controller {
             'title' => 'Category',
             'total' => $categories_total,
             'totalDeleted' => $categories_deleted_total
-            )
+                )
         );
     }
 
@@ -110,7 +112,7 @@ class CategoriesController extends Controller {
     public function edit($id) {
         $category = $this->repository->find($id);
 
-        return view('categories.edit', compact('category'));
+        return view('categories.edit', ['title' => 'Category', 'category' => $category]);
     }
 
     public function update(CategorieUpdateRequest $request, $id) {
