@@ -30,6 +30,9 @@ $app = require_once __DIR__.'/bootstrap/app.php';
 |
 */
 
+$app->bind('path.public', function() {
+    return '../../public';
+});
 $kernel = $app->make(Illuminate\Contracts\Console\Kernel::class);
 
 $status = $kernel->handle(
