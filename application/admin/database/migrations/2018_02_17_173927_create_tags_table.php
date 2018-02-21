@@ -4,9 +4,9 @@ use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
 /**
- * Class CreateProductsTable.
+ * Class CreateTagsTable.
  */
-class CreateProductsTable extends Migration
+class CreateTagsTable extends Migration
 {
 	/**
 	 * Run the migrations.
@@ -15,11 +15,12 @@ class CreateProductsTable extends Migration
 	 */
 	public function up()
 	{
-            Schema::create('products', function(Blueprint $table) {
+		Schema::create('tags', function(Blueprint $table) {
             $table->increments('id');
+
             $table->timestamps();
-        });
-    }
+		});
+	}
 
 	/**
 	 * Reverse the migrations.
@@ -28,6 +29,6 @@ class CreateProductsTable extends Migration
 	 */
 	public function down()
 	{
-		Schema::drop('products');
+		Schema::drop('tags');
 	}
 }
