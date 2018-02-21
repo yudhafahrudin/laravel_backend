@@ -13,16 +13,12 @@
                 <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a>
             </div>
             @endif
+            
+           
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Detail Categories
-
-                    <span class="pull-right">
-                        <a class="btn btn-success" href='{{url('categories')}}'>
-                            List Categories
-                        </a>
-                    </span> 
+                    Detail Logged for <strong>{{$name}}</strong>
                 </div>
                 <div class="panel-body">
                     <div class="canvas-wrapper">
@@ -31,29 +27,49 @@
                             <div class="card card-default">
 
                                 <div class="card-body">
-                                    <div class="col-md-2 text-md-right">Code</div>
-                                    <div class="col-md-10 text-md-right">{{$category->code}}</div>
-                                    <div class="col-md-2 text-md-right">Name</div>
-                                    <div class="col-md-10 text-md-right">{{$category->name}}</div>
-                                    <div class="col-md-2 text-md-right">Description</div>
-                                    <div class="col-md-10 text-md-right">{{$category->description}}</div>
-                                    <div class="col-md-2 text-md-right">Created By</div>
-                                    <div class="col-md-10 text-md-right">{{$category->created_by}}</div>
-                                    <div class="col-md-12 text-md-right"> 
-                                        <form action="{{ route('categories.delete',['categories' => $category->id]) }}" method="post" class="form-horizontal">
-                                            @csrf
-                                            <input type="submit" class="btn btn-danger" value="Delete">
-                                        </form>
-                                    </div>
-                                </div>
+                                    <div class="panel panel-default ">
+                                        <div class="panel-body timeline-container" style="display: block;">
+                                            <ul class="timeline">
 
+                                                @foreach($logCollectedEdited as $value)
+                                              
+                                                <li>
+                                                    <div class="timeline-badge primary"><em class="glyphicon glyphicon-link"></em></div>
+                                                    <div class="timeline-panel">
+                                                        <div class="timeline-heading">
+                                                            <h4 class="timeline-title">
+                                                                Created By {{
+                                                                array_get($value,'causerUsername')
+                                                                }}
+                                                            </h4>
+                                                        </div>
+                                                        <div class="timeline-body">
+                                                            detail : <br> <pre>{{print_r(array_get($value,'afterDetail'))}}</pre> <br>
+                                                        </div>
+                                                        <div class="timeline-heading">
+                                                            <h4 class="timeline-title">
+                                                                At {{
+                                                                array_get($value,'time')
+                                                                }}
+                                                            </h4>
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                                @endforeach
+                                            </ul>
+                                        </div>
+                                    </div>
+
+                                </div>
                             </div>
 
                         </div>
+
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
 </div>
 @endsection
