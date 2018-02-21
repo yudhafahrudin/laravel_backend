@@ -80,3 +80,14 @@
     </div>
 </div><!--/.row-->
 @endsection
+@section('bread')
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="#">
+                <em class="fa fa-home"></em>
+            </a></li>
+        <li class="active">Dashboard</li>
+    </ol>
+    <br>
+</div><!--/.row-->
+@endsection
