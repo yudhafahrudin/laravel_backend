@@ -16,11 +16,11 @@
 
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    Detail Categories
+                    Detail User
 
                     <span class="pull-right">
-                        <a class="btn btn-success" href='{{url('categories')}}'>
-                            List Categories
+                        <a class="btn btn-success" href='{{route('show.user')}}'>
+                            List User
                         </a>
                     </span> 
                 </div>
@@ -31,17 +31,17 @@
                             <div class="card card-default">
 
                                 <div class="card-body">
-                                    <div class="col-md-2 text-md-right">Code</div>
-                                    <div class="col-md-10 text-md-right">{{$category->code}}</div>
+                                    <div class="col-md-2 text-md-right">Username</div>
+                                    <div class="col-md-10 text-md-right">{{$userFind->username}}</div>
                                     <div class="col-md-2 text-md-right">Name</div>
-                                    <div class="col-md-10 text-md-right">{{$category->name}}</div>
-                                    <div class="col-md-2 text-md-right">Description</div>
-                                    <div class="col-md-10 text-md-right">{{$category->description}}</div>
-                                    <div class="col-md-2 text-md-right">Created By</div>
-                                    <div class="col-md-10 text-md-right">{{$category->created_by}}</div>
+                                    <div class="col-md-10 text-md-right">{{$userFind->name}}</div>
+                                    <div class="col-md-2 text-md-right">Email</div>
+                                    <div class="col-md-10 text-md-right">{{$userFind->email}}</div>
                                     <div class="col-md-12 text-md-right"> 
-                                        <form action="{{ route('categories.delete',['categories' => $category->id]) }}" method="post" class="form-horizontal">
+                                        <br>
+                                        <form action="{{ route('delete.user',['user' => $userFind->id]) }}" method="post" class="form-horizontal">
                                             @csrf
+                                            <a href="{{ route('show.edit.user',['id' =>$userFind->id])}}" class="btn btn-info"> Edit </a> 
                                             <input type="submit" class="btn btn-danger" value="Delete">
                                         </form>
                                     </div>

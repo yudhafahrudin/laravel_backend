@@ -10,15 +10,20 @@ $collapse_id = 0;
 <div id="sidebar-collapse" class="col-sm-3 col-lg-2 sidebar">
     <div class="profile-sidebar">
         <div class="profile-userpic">
-            <img src="http://placehold.it/50/30a5ff/fff" class="img-responsive" alt="">
+
+            @unless (!Auth::user())
+        <img src="{{ url('storage/user/images/profile/'.Auth::user()->path_thumb) }}" class="img-responsive" alt="">
+            @endunless
         </div>
         <div class="profile-usertitle">
             <div class="profile-usertitle-name">
                 @unless (!Auth::user())
-                {{ Auth::user()->username }}
-                @endunless
+                <a style="text-decoration: none;color: #444444;" href="{{route('user.profile',['username'=>Auth::user()->username])}}">
+                        {{ Auth::user()->username }}
+                        @endunless
+                </a>
             </div>
-            <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
+        <div class="profile-usertitle-status"><span class="indicator label-success"></span>Online</div>
         </div>
         <div class="clear"></div>
     </div>

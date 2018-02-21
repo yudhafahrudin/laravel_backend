@@ -40,8 +40,10 @@
                                     <div class="col-md-2 text-md-right">Created By</div>
                                     <div class="col-md-10 text-md-right">{{$category->created_by}}</div>
                                     <div class="col-md-12 text-md-right"> 
+                                        <br>
                                         <form action="{{ route('categories.delete',['categories' => $category->id]) }}" method="post" class="form-horizontal">
                                             @csrf
+                                            <a href="{{url('categories/'.$category->id.'/edit')}}" class="btn btn-info"> Edit </a> 
                                             <input type="submit" class="btn btn-danger" value="Delete">
                                         </form>
                                     </div>

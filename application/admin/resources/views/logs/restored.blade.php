@@ -9,17 +9,19 @@
 
     <div class="row">
         <div class="col-md-12">
+            @if(session()->has('message'))
+            <div class="alert bg-success">
+                {{ session()->get('message') }}
+                <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a>
+            </div>
+            @endif
+
             <div class="panel panel-default">
                 <div class="panel-heading">
-                    List of user registration
-
-                    <span class="pull-right">
-                        <a class="btn btn-success" href='{{route('add_user')}}'>
-                            Add User
-                        </a>
-                    </span> 
+                    List of last restored 
 
                 </div>
+
                 <div class="panel-body">
                     <div class="canvas-wrapper">
                         <div class="main-chart" id="line-chart" height="200" width="600">
@@ -27,23 +29,35 @@
                                 <thead>
                                     <tr>
                                         <th>No</th>
-                                        <th>Username</th>
+                                        <th>Type</th>
                                         <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
+                                        <th>Restored By</th>
+                                        <th>Restored At</th>
                                     </tr>
                                 </thead>
                                 <tbody>
 
-                                    @foreach ($userAll as $value)
+                                    @foreach ($logsCollected as $value)
                                     <tr>
                                         <td>{{$listNomor++}}</td>
-                                        <td>{{$value->username}}</td>
-                                        <td>{{$value->name}}</td>
-                                        <td>{{$value->email}}</td>
+                                        <td>{{
+                                            array_get($value,'type')
+                                            }}
+                                        </td>
+                                        <td>{{
+                                            array_get($value,'subjectName')
+                                            }}
+                                        </td>
+                                        <td>{{
+                                            array_get($value,'causerUsernmae')
+                                            }}
+                                        </td>
+                                        <td>{{
+                                            array_get($value, 'time')
+                                            }}
+                                        </td>
                                         <td>
-                                            <span class="label label-info">Edit</span>
-                                            <span class="label label-danger">Delete</span>
+                                            <a href="{{route('logs.detail.restored',['id'=>array_get($value,'id')])}}" class="label label-info"> Detail </a>
                                         </td>
                                     </tr>
                                     @endforeach
