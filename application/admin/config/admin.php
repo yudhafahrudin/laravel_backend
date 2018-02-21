@@ -15,14 +15,56 @@ return [
             'icon' => 'fa-tags',
             'url' => 'categories',
         ],
+        'product' => [
+            'name' => 'Product',
+            'icon' => 'fa-product-hunt',
+            'url' => 'categories',
+        ],
         'user' => [
             'name' => 'User',
             'icon' => 'fa-user',
             'subnav' => [
-                'add_user' => [
+                'addUser' => [
                     'name' => 'User',
                     'icon' => '',
                     'url' => 'user',
+                ],
+            ],
+        ],
+        'trash' => [
+            'name' => 'Trash',
+            'icon' => 'fa-trash-o',
+            'subnav' => [
+                'userTrash' => [
+                    'name' => 'User Trashed',
+                    'icon' => '',
+                    'url' => 'user/trash/all',
+                ],
+            ],
+        ],
+        'logActivity' => [
+            'name' => 'Log',
+            'icon' => 'fa-history',
+            'subnav' => [
+                'createdLog' => [
+                    'name' => 'Created Loged',
+                    'icon' => '',
+                    'url' => 'logs/created',
+                ],
+                'restoredLog' => [
+                    'name' => 'Restored Loged',
+                    'icon' => '',
+                    'url' => 'logs/restored',
+                ],
+                'updatedLog' => [
+                    'name' => 'Updated Loged',
+                    'icon' => '',
+                    'url' => 'logs/updated',
+                ],
+                'deletedLog' => [
+                    'name' => 'Deleted Loged',
+                    'icon' => '',
+                    'url' => 'logs/deleted',
                 ],
             ],
         ],
