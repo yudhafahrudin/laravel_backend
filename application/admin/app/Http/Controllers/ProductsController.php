@@ -11,6 +11,7 @@ use App\Http\Requests\ProductCreateRequest;
 use App\Http\Requests\ProductUpdateRequest;
 use App\Repositories\ProductRepository;
 use App\Validators\ProductValidator;
+use App\Entities\Product;
 
 /**
  * Class ProductsController.
@@ -50,7 +51,7 @@ class ProductsController extends Controller
     {
         $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
         $products = $this->repository->all();
-
+        
         if (request()->wantsJson()) {
 
             return response()->json([

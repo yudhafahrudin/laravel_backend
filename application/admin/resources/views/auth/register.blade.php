@@ -13,13 +13,13 @@
                 <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a>
             </div>
             @endif
-            
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Register for new user
 
                      <span class="pull-right">
-                        <a class="btn btn-success" href='{{route('user')}}'>
+                        <a class="btn btn-success" href='{{route('show.user')}}'>
                             List User
                         </a>
                     </span> 
@@ -31,7 +31,7 @@
                             <div class="card card-default">
 
                                 <div class="card-body">
-                                    <form method="POST" action="{{ route('register') }}">
+                                    <form method="POST" action="{{ route('register') }}" enctype="multipart/form-data">
                                         @csrf
 
                                         <div class="form-group row">
@@ -94,6 +94,18 @@
 
                                             <div class="col-md-10">
                                                 <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="user-image" class="col-md-2 col-form-label text-md-right">Image</label>
+
+                                            <div class="col-md-10">
+                                                <input type="file" class="form-control" name="photo">
+                                                 @if ($errors->has('photo'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('photo') }}</strong>
+                                                </span>
+                                                @endif
                                             </div>
                                         </div>
 

@@ -4,26 +4,23 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Illuminate\Database\Eloquent\SoftDeletes;
+use Spatie\Activitylog\Traits\LogsActivity;
 
-class User extends Authenticatable
-{
+class User extends Authenticatable {
+
     use Notifiable;
+    use SoftDeletes;
+    use LogsActivity;
 
-    /**
-     * The attributes that are mass assignable.
-     *
-     * @var array
-     */
-    protected $fillable = [
-        'name', 'email', 'password', 'username'
-    ];
+    protected static $logName = 'User';
+    protected static $logAttributes = ['name','username','email'];
+    protected static $ignoreChangedAttributes = ['remember_token'];
+    protected static $logOnlyDirty = true;
+    
+    protected $fillable = ['name', 'email', 'password', 'username', 'created_by','path_thumb','path_original'];
+    protected $hidden = ['password', 'remember_token'];
+    protected $dates = ['created_at', 'updated_at', 'deleted_at'];
+    
 
-    /**
-     * The attributes that should be hidden for arrays.
-     *
-     * @var array
-     */
-    protected $hidden = [
-        'password', 'remember_token',
-    ];
 }

@@ -9,6 +9,13 @@
 
     <div class="row">
         <div class="col-md-12">
+            @if(session()->has('message'))
+            <div class="alert bg-success">
+                {{ session()->get('message') }}
+                <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a>
+            </div>
+            @endif
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     List of user registration
@@ -20,6 +27,7 @@
                     </span> 
 
                 </div>
+
                 <div class="panel-body">
                     <div class="canvas-wrapper">
                         <div class="main-chart" id="line-chart" height="200" width="600">
@@ -38,12 +46,13 @@
                                     @foreach ($userAll as $value)
                                     <tr>
                                         <td>{{$listNomor++}}</td>
-                                        <td>{{$value->username}}</td>
-                                        <td>{{$value->name}}</td>
-                                        <td>{{$value->email}}</td>
+                                        <td>{{object_get($value, 'username')}}</td>
+                                        <td>{{object_get($value, 'name')}}</td>
+                                        <td>{{object_get($value, 'email')}}</td>
                                         <td>
-                                            <span class="label label-info">Edit</span>
-                                            <span class="label label-danger">Delete</span>
+                                            <a href="{{ route('user.profile',['username'=>object_get($value, 'username')])}}"><span class="label label-warning">Detail</span></a>
+                                            <a href="{{ route('show.edit.user',['id' =>object_get($value, 'id')])}}"><span class="label label-info">Edit</span></a>
+
                                         </td>
                                     </tr>
                                     @endforeach
