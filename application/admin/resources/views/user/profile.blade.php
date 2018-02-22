@@ -27,6 +27,9 @@
                             <li class="tab">
                                 <a href="#settings" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Settings</span> </a>
                             </li>
+                            <li class="tab">
+                                <a href="#nonactive" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-cog"></i></span> <span class="hidden-xs">Delete User</span> </a>
+                            </li>
                         </ul>   
                         <div class="tab-content">
                             <div id="profile" class="row tab-pane active">
@@ -44,17 +47,17 @@
                                         <h3>{{$userFind->name}}</h3>
                                         <small>
                                             <cite title="San Francisco, USA">
-                                                San Francisco, USA 
+                                                {{$userFind->username}} 
                                                 <i class="glyphicon glyphicon-map-marker"></i>
                                             </cite>
                                         </small>
                                         <br /><br />
                                         <p>
-                                            <i class="glyphicon glyphicon-envelope"></i> {{$userFind->username}}
+                                            <i class="fa fa-user-circle-o"></i> {{$userFind->username}}
                                             <br />
-                                            <i class="glyphicon glyphicon-globe"></i> Not filled
+                                            <i class="glyphicon glyphicon-envelope"></i> {{$userFind->email}}
                                             <br />
-                                            <i class="glyphicon glyphicon-gift"></i> Not filled
+                                            <i class="glyphicon glyphicon-gift"></i> {{$userFind->created_at}}
                                         </p>
 
                                     </div>
@@ -93,6 +96,35 @@
                                             <div class="form-group">
                                                 <div class="col-sm-12">
                                                     <button class="btn btn-success">Update Profile</button>
+                                                </div>
+                                            </div>
+                                        </form>
+
+                                    </div>
+                                </div>
+                            </div>
+                            <div id="nonactive" class="row tab-pane">
+                                <div class="col-md-3">
+                                    <div class="user-bg">
+                                        <div class="user-content">
+                                            @unless (!Auth::user())
+                                            <img style="width: 100%" src="{{ url('images/profile/'.$userFind->path_thumb) }}" class="img-responsive" alt="">
+                                            @endunless
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="white-box col-md-9">
+                                    <div class="tab-pane active" id="settings">
+                                        <form class="form-horizontal form-material">
+
+                                            <div class="form-group">
+                                                <label class="col-md-12">Do you want to non active this user ?
+                                                    Are you sure ?</label>
+                                                <div class="col-sm-12">
+                                                    <form action="{{ route('delete.user',['user' => $userFind->id]) }}" method="post" class="form-horizontal">
+                                                        @csrf
+                                                        <input type="submit" class="btn btn-danger" value="Delete">
+                                                    </form>
                                                 </div>
                                             </div>
                                         </form>
