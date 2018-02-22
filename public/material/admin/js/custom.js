@@ -25,3 +25,6 @@ $(document).on('click', '.panel-heading span.clickable', function(e){
 $(document).ready(function(){
     $('#myTable').DataTable();
 });
+$(document).ready(function(){
+    $('.dropify').dropify();
+});

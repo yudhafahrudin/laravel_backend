@@ -15,11 +15,6 @@ return [
             'icon' => 'fa-tags',
             'url' => 'categories',
         ],
-        'product' => [
-            'name' => 'Product',
-            'icon' => 'fa-product-hunt',
-            'url' => 'categories',
-        ],
         'user' => [
             'name' => 'User',
             'icon' => 'fa-user',
