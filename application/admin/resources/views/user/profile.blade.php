@@ -1,9 +1,6 @@
-@extends('layouts.app')
-@include('layouts.breadcumb')
 
-@section('content')
-<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-    @yield('bread')
+<div class="col-sm-12 col-lg-12 main">
+
     <div class="row">
         <div class="col-md-12">
 
@@ -15,13 +12,10 @@
             @endif
 
             <div class="panel panel-default">
-                <div class="panel-body">
+                <div class="panel-body tabs">
                     <div class="canvas-wrapper">
-                        <ul class="nav nav-tabs tabs customtab">
-                            <!--                                <li class="tab active">
-                                                                <a href="#home" data-toggle="tab" aria-expanded="true"> <span class="visible-xs"><i class="fa fa-home"></i></span> <span class="hidden-xs">Activity</span> </a>
-                                                            </li>-->
-                            <li class="tab">
+                        <ul class="nav nav-tabs" role="tablist">
+                            <li class="tab active">
                                 <a href="#profile" data-toggle="tab" aria-expanded="false"> <span class="visible-xs"><i class="fa fa-user"></i></span> <span class="hidden-xs">Profile</span> </a>
                             </li>
                             <li class="tab">
@@ -57,7 +51,7 @@
                                             <br />
                                             <i class="glyphicon glyphicon-envelope"></i> {{$userFind->email}}
                                             <br />
-                                            <i class="glyphicon glyphicon-gift"></i> {{$userFind->created_at}}
+                                            <i class="fa fa-plus-square"></i> {{$userFind->created_at}}
                                         </p>
 
                                     </div>
@@ -115,18 +109,17 @@
                                 </div>
                                 <div class="white-box col-md-9">
                                     <div class="tab-pane active" id="settings">
-                                        <form class="form-horizontal form-material">
 
-                                            <div class="form-group">
-                                                <label class="col-md-12">Do you want to non active this user ?
-                                                    Are you sure ?</label>
-                                                <div class="col-sm-12">
-                                                    <form action="{{ route('delete.user',['user' => $userFind->id]) }}" method="post" class="form-horizontal">
-                                                        @csrf
-                                                        <input type="submit" class="btn btn-danger" value="Delete">
-                                                    </form>
-                                                </div>
+                                        <div class="form-group">
+                                            <label class="col-md-12">Do you want to delete this user ?
+                                                Are you sure ?</label>
+                                            <div class="col-sm-12">
+                                                <form action="{{ route('delete.user',['user' => $userFind->id]) }}" method="post" id="submitDelete" class="form-horizontal">
+                                                    @csrf
+                                                    <input type="submit" id="submitDeleteInput" class="btn btn-danger" value="Delete">
+                                                </form>
                                             </div>
+                                        </div>
                                         </form>
 
                                     </div>
@@ -136,7 +129,34 @@
                     </div>
                 </div>
             </div>
+
+
+
         </div>
     </div>
 </div>
-@endsection
+<script type="text/javascript">
+
+    $('#submitDeleteInput').on('click', function (e) {
+        e.preventDefault();
+        $.confirm({
+            title: 'Are you sure ?',
+            content: 'Delete this user  ',
+            buttons: {
+                confirm: function () {
+                    $('#submitDelete').submit();
+                },
+                cancel: function () {
+                    $.alert('Canceled!');
+                },
+            },
+//            icon: 'fa fa-smile-o',
+            theme: 'modern',
+            closeIcon: true,
+            animation: 'scale',
+            type: 'blue',
+        });
+    });
+
+
+</script>
