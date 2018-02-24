@@ -5,7 +5,10 @@
 @section('content')
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-    @yield('breadcumb')
+    <div class="row">
+        {{ Breadcrumbs::render('user') }}
+        <br>
+    </div>
 
     <div class="row">
         <div class="col-md-12">
@@ -50,7 +53,7 @@
                                         <td>{{object_get($value, 'name')}}</td>
                                         <td>{{object_get($value, 'email')}}</td>
                                         <td>
-                                            <a href="{{ route('user.profile',['username'=>object_get($value, 'username')])}}"><span class="label label-warning">Detail</span></a>
+                                            <a href="#" onclick="profileAJAX('{{object_get($value, 'username')}}')" data-toggle="modal" data-target="#exampleModalCenter" ><span class="label label-warning">Detail</span></a>
                                             <a href="{{ route('show.edit.user',['id' =>object_get($value, 'id')])}}"><span class="label label-info">Edit</span></a>
 
                                         </td>
@@ -69,4 +72,26 @@
         </div>
     </div>
 </div>	<!--/.main-->
+
+<div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+    <div class="modal-dialog modal-lg" role="document">
+        <div class="modal-content">
+            <!--            <div class="modal-header">
+                            <h3 class="modal-title" id="exampleModalLongTitle">Detail Profile</h3>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>-->
+
+            <div style="display: block" class="modal-body">
+
+            </div>
+
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <!--<button type="button" class="btn btn-primary">Save changes</button>-->
+            </div>
+        </div>
+    </div>
+</div>
 @endsection
