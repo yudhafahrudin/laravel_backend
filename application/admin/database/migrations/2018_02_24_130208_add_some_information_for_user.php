@@ -4,16 +4,17 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class AddSomeInformationForUser extends Migration
-{
+class AddSomeInformationForUser extends Migration {
+
     /**
      * Run the migrations.
      *
      * @return void
      */
-    public function up()
-    {
-        //
+    public function up() {
+        Schema::table('users', function($table) {
+            $table->text('description')->nullable();
+        });
     }
 
     /**
@@ -21,8 +22,8 @@ class AddSomeInformationForUser extends Migration
      *
      * @return void
      */
-    public function down()
-    {
-        //
+    public function down() {
+        $table->dropColumn('description');
     }
+
 }
