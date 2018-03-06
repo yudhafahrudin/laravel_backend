@@ -13,12 +13,12 @@
                 <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a>
             </div>
             @endif
-            
+
             <div class="panel panel-default">
                 <div class="panel-heading">
                     Add Categories
 
-                     <span class="pull-right">
+                    <span class="pull-right">
                         <a class="btn btn-success" href='{{url('categories')}}'>
                             List Categories
                         </a>
@@ -73,7 +73,7 @@
                                                 @endif
                                             </div>
                                         </div>
-                                       
+
 
                                         <div class="form-group row mb-0">
                                             <div class="col-md-6 offset-md-4">
