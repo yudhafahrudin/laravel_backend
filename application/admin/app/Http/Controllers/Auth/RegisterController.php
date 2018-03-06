@@ -61,6 +61,7 @@ use RegistersUsers;
                     'username' => $data['username'],
                     'name' => $data['name'],
                     'email' => $data['email'],
+                    'description' => $data['description'],
                     'password' => bcrypt($data['password']),
                     'created_by' => Auth::user()->username,
                     'path_thumb' => $this->pathThumb,
@@ -77,7 +78,6 @@ use RegistersUsers;
         $this->validator($request->all())->validate();
         $this->validatorImage($request->all())->validate();
         $this->postImage($request);
-
         event(new Registered($user = $this->create($request->all())));
 
 //        $this->guard()->login($user);
@@ -107,7 +107,7 @@ use RegistersUsers;
         Storage::disk('public')->put($fullPath . $imagename, $fileImage->__toString());
         // Path Tumb
         $this->pathThumb = $this->pathImageThumbnail . 'thumb/' . $imagename;
-       
+
         /*         * ****************** ORIGINAL IMAGE *************************** */
         $fullPath = $this->pathImageTemp . $this->pathImageThumbnail . 'original/';
         // Make directory

@@ -13,12 +13,14 @@ class User extends Authenticatable {
     use SoftDeletes;
     use LogsActivity;
 
+    // Log Activity
     protected static $logName = 'User';
-    protected static $logAttributes = ['name','username','email'];
+    protected static $logAttributes = ['name','username','email','description'];
     protected static $ignoreChangedAttributes = ['remember_token'];
     protected static $logOnlyDirty = true;
     
-    protected $fillable = ['name', 'email', 'password', 'username', 'created_by','path_thumb','path_original'];
+    //Model scope
+    protected $fillable = ['name', 'email', 'password', 'username', 'description', 'created_by','path_thumb','path_original'];
     protected $hidden = ['password', 'remember_token'];
     protected $dates = ['created_at', 'updated_at', 'deleted_at'];
     

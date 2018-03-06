@@ -3,8 +3,8 @@
 
 @section('content')
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-<div class="row">
-        {{ Breadcrumbs::render('user') }}
+    <div class="row">
+        {{ Breadcrumbs::render('user.add') }}
         <br>
     </div>
     <div class="row">
@@ -63,7 +63,6 @@
                                                 @endif
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
                                             <label for="email" class="col-md-2 col-form-label text-md-right">E-Mail Address</label>
 
@@ -77,7 +76,6 @@
                                                 @endif
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
                                             <label for="password" class="col-md-2 col-form-label text-md-right">Password</label>
 
@@ -91,7 +89,6 @@
                                                 @endif
                                             </div>
                                         </div>
-
                                         <div class="form-group row">
                                             <label for="password-confirm" class="col-md-2 col-form-label text-md-right">Confirm Password</label>
 
@@ -100,10 +97,45 @@
                                             </div>
                                         </div>
                                         <div class="form-group row">
+                                            <label for="password" class="col-md-2 col-form-label text-md-right">Description</label>
+
+                                            <div class="col-md-10">
+                                                <textarea rows="5" id="description"  class="form-control{{ $errors->has('description') ? ' is-invalid' : '' }}" name="description">{{ old('description') }}</textarea>
+
+                                                @if ($errors->has('description'))
+                                                <span class="invalid-feedback">
+                                                    <strong>{{ $errors->first('description') }}</strong>
+                                                </span>
+                                                @endif
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
                                             <label for="user-image" class="col-md-2 col-form-label text-md-right">Image</label>
 
-                                            <div class="col-md-5">
-                                                <input type="file" class="form-control dropify" name="photo">
+                                            <div class="col-md-7">
+                                                <div class="imageupload">                                                    
+                                                <div class="file-tab">
+                                                    <img src="http://admin.indobild.app.ittron.co.id/cresenity/noimage/120/120" alt="Image preview" class="thumbnail img-responsive" >
+                                                    <label class="btn btn-default btn-file">
+                                                        <span>Browse</span>
+                                                        <!-- The file is stored here. -->
+                                                        <input type="file" name="photo">
+                                                    </label>
+                                                    <button type="button" class="btn btn-default">Remove</button>
+                                                </div>
+<!--                                                <div class="url-tab panel-body">
+                                                    <div class="input-group">
+                                                        <input type="text" class="form-control hasclear" placeholder="Image URL">
+                                                        <div class="input-group-btn">
+                                                            <button type="button" class="btn btn-default">Submit</button>
+                                                        </div>
+                                                    </div>
+                                                    <button type="button" class="btn btn-default">Remove</button>
+                                                     The URL is stored here. 
+                                                    <input type="hidden" name="image-url">
+                                                </div>-->
+                                            </div>
+                                                <!--<input type="file" id="fine-uploader" class="form-control" name="photo">-->
                                                 @if ($errors->has('photo'))
                                                 <span class="invalid-feedback">
                                                     <strong>{{ $errors->first('photo') }}</strong>
@@ -111,24 +143,24 @@
                                                 @endif
                                             </div>
                                         </div>
-                                </div>
 
-                                <div class="form-group row mb-0">
-                                    <div class="col-md-6 offset-md-4">
-                                        <button type="submit" class="btn btn-primary">
-                                            Register
-                                        </button>
-                                    </div>
+
+                                        <div class="form-group row mb-0">
+                                            <div class="col-md-6 offset-md-4">
+                                                <button type="submit" class="btn btn-primary">
+                                                    Register
+                                                </button>
+                                            </div>
+                                        </div>
+                                    </form>
                                 </div>
-                                </form>
                             </div>
-                        </div>
 
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </div>
-</div>
 </div>
 @endsection
