@@ -24,13 +24,3 @@ $(document).on('click', '.panel-heading span.clickable', function (e) {
     }
 })
 
-$(document).ready(function () {
-    $('#myTable').DataTable();
-});
-$(document).ready(function () {
-    $('.dropify').dropify();
-});
-
-$('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').focus()
-})

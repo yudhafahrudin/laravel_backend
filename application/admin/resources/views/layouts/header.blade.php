@@ -15,8 +15,8 @@
         <link href="{{ asset('material/admin/css/font-awesome.min.css') }}" rel="stylesheet">
         <link href="{{ asset('material/admin/css/jquery.dataTables.min.css') }}" rel="stylesheet">
         <link href="{{ asset('material/admin/css/datepicker3.css') }}" rel="stylesheet">
-        <link href="{{ asset('material/admin/css/dropify.min.css') }}" rel="stylesheet">
         <link href="{{ asset('material/admin/css/jquery-confirm.css') }}" rel="stylesheet">
+        <link href="{{ asset('material/admin/css/bootstrap-imageupload.min.css') }}" rel="stylesheet">
         <link href="{{ asset('material/admin/css/styles.css') }}" rel="stylesheet">
         
         <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
