@@ -63,8 +63,23 @@
                                     <div class="user-bg">
                                         <div class="user-content">
                                             @unless (!Auth::user())
-                                            <img style="width: 100%" src="{{ url('images/profile/'.$userFind->path_thumb) }}" class="img-responsive" alt="">
+                                            <!--<img style="width: 100%" src="{{ url('images/profile/'.$userFind->path_thumb) }}" class="img-responsive" alt="">-->
                                             @endunless
+
+                                            <div class="imageupload">
+
+                                                <div class="file-tab">
+                                                    @unless (!Auth::user())
+                                                    <img style="width: 100%" src="{{ url('images/profile/'.$userFind->path_thumb) }}" alt="Image preview" class="thumbnail img-responsive">
+                                                    @endunless
+                                                    <label class="btn btn-default btn-file">
+                                                        <span>Browse</span>
+                                                        <!-- The file is stored here. -->
+                                                        <input type="file" name="photo">
+                                                    </label>
+                                                </div>
+                                            </div>
+
                                         </div>
                                     </div>
                                 </div>
@@ -74,7 +89,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-12">Username</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" placeholder="{{$userFind->username}}" class="form-control form-control-line"> </div>
+                                                    <input disabled type="text" placeholder="{{$userFind->username}}" class="form-control form-control-line"> </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-12">Name</label>
@@ -85,6 +100,13 @@
                                                 <label class="col-md-12">Email</label>
                                                 <div class="col-md-12">
                                                     <input type="text" placeholder="{{$userFind->email}}" class="form-control form-control-line"> </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label class="col-md-12">Description</label>
+                                                <div class="col-md-12">
+                                                    <textarea class="form-control form-control-line">{{$userFind->description}}
+                                                    </textarea>
+                                                </div>
                                             </div>
 
                                             <div class="form-group">
@@ -158,5 +180,27 @@
         });
     });
 
+    var $imageupload = $('.imageupload');
+    $imageupload.imageupload({
+        allowedFormats: ["jpg", "jpeg", "png", "gif"],
+        maxWidth: 200,
+//        maxHeight: 250,
+        maxFileSizeKb: 2048
+    });
+
+//    $('#imageupload-disable').on('click', function () {
+//        $imageupload.imageupload('disable');
+//        $(this).blur();
+//    })
+//
+//    $('#imageupload-enable').on('click', function () {
+//        $imageupload.imageupload('enable');
+//        $(this).blur();
+//    })
+//
+//    $('#imageupload-reset').on('click', function () {
+//        $imageupload.imageupload('reset');
+//        $(this).blur();
+//    });
 
 </script>
