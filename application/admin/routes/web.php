@@ -63,6 +63,10 @@ Breadcrumbs::register('user', function ($breadcrumbs) {
     $breadcrumbs->parent('home');
     $breadcrumbs->push('user', route('show.user'));
 });
+Breadcrumbs::register('user.add', function ($breadcrumbs) {
+    $breadcrumbs->parent('user');
+    $breadcrumbs->push('user add', route('add_user'));
+});
 
 Breadcrumbs::register('user.profile', function ($breadcrumbs, $user) {
     $breadcrumbs->parent('user');
