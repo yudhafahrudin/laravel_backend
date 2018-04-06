@@ -96,7 +96,7 @@ use RegistersUsers;
         $this->pathImageTemp = '/user/images/profile/';
         $this->pathImageThumbnail = $request->username . '/' . $rand . '/';
 
-        /*         * ****************** THUMBNAIL IMAGE *************************** */
+        /************************  THUMBNAIL IMAGE *****************************/
         $fullPath = $this->pathImageTemp . $this->pathImageThumbnail . 'thumb/';
         // Make directory
         $this->makeDirectory($fullPath);
@@ -108,7 +108,7 @@ use RegistersUsers;
         // Path Tumb
         $this->pathThumb = $this->pathImageThumbnail . 'thumb/' . $imagename;
 
-        /*         * ****************** ORIGINAL IMAGE *************************** */
+        /************************ ORIGINAL IMAGE *******************************/
         $fullPath = $this->pathImageTemp . $this->pathImageThumbnail . 'original/';
         // Make directory
         $this->makeDirectory($fullPath);

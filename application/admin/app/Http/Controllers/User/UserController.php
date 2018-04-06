@@ -21,6 +21,7 @@ class UserController extends Controller {
     protected function validator(array $data) {
         return Validator::make($data, [
                     'name' => 'string|max:255',
+                    'email' => 'required|string|email|max:255|unique:users',
         ]);
     }
 
@@ -39,7 +40,7 @@ class UserController extends Controller {
 
     public function showProfileUser($username) {
         $userFind = User::where('username', $username)->get();
-       
+
         return view('user.profile', array(
             'userFind' => $userFind[0],
             'title' => $userFind[0]->name)
@@ -50,15 +51,21 @@ class UserController extends Controller {
 
         $validator = $this->validator($this->request->all());
         if ($validator->fails()) {
-            return redirect()->back()->withErrors($validator);
+            return redirect()->back()->with(['message' => 'Your custom message here', 'status' => 'error']);
+//            return redirect()->back()->withErrors($validator);
         } else {
+
+            dd( object_get($this->request, 'email'));
             // store
             $nerd = User::find($id);
             $nerd->name = object_get($this->request, 'name');
+            $nerd->email = object_get($this->request, 'email');
+            $nerd->description = object_get($this->request, 'description');
             $nerd->save();
 
             // redirect
-            return redirect()->back()->with('message', 'User updated!');
+            return redirect()->back()->with(['message' => 'Your custom message here', 'status' => 'success']);
+//            return redirect()->back()->with('message', 'User updated!');
         }
     }
 
@@ -72,7 +79,6 @@ class UserController extends Controller {
 
             return redirect('user')->with('message', 'User [ ' . $userName . ' ] deleted');
         } catch (ValidatorException $e) {
-
             return redirect('user')->with('message', $e->getMessageBag());
         }
     }

@@ -13,7 +13,7 @@
     <div class="row">
         <div class="col-md-12">
             @if(session()->has('message'))
-            <div class="alert bg-success">
+            <div class="alert bg-{{session()->get('status')}}">
                 {{ session()->get('message') }}
                 <a href="#" class="pull-right"><em class="fa fa-lg fa-close"></em></a>
             </div>

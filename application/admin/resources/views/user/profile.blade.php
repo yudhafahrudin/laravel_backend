@@ -85,7 +85,10 @@
                                 </div>
                                 <div class="white-box col-md-9">
                                     <div class="tab-pane active" id="settings">
-                                        <form class="form-horizontal form-material">
+                                        
+                                        <form id="submitUpdate" method="POST" action="{{ route('edit.user',['id'=>object_get($userFind, 'id')]) }}">
+                                            <input name="_method" type="hidden" value="PUT">
+                                            @csrf
                                             <div class="form-group">
                                                 <label class="col-md-12">Username</label>
                                                 <div class="col-md-12">
@@ -94,24 +97,26 @@
                                             <div class="form-group">
                                                 <label class="col-md-12">Name</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" placeholder="{{$userFind->name}}" class="form-control form-control-line"> </div>
+                                                    <input type="text" name="name" placeholder="{{$userFind->name}}" class="form-control form-control-line" required> </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-12">Email</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" placeholder="{{$userFind->email}}" class="form-control form-control-line"> </div>
+                                                    <input type="email" name="email" placeholder="{{$userFind->email}}" class="form-control form-control-line" required> </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-12">Description</label>
                                                 <div class="col-md-12">
-                                                    <textarea class="form-control form-control-line">{{$userFind->description}}
+                                                    <textarea name="description" class="form-control form-control-line">{{$userFind->description}}
                                                     </textarea>
                                                 </div>
                                             </div>
-
                                             <div class="form-group">
                                                 <div class="col-sm-12">
-                                                    <button class="btn btn-success">Update Profile</button>
+                                                    <br>
+                                                    <button type="submit" id="submitUpdateInput" class="btn btn-primary">
+                                                    Update profile
+                                                </button>
                                                 </div>
                                             </div>
                                         </form>
@@ -173,10 +178,26 @@
                 },
             },
 //            icon: 'fa fa-smile-o',
-            theme: 'modern',
             closeIcon: true,
             animation: 'scale',
-            type: 'blue',
+        });
+    });
+    $('#submitUpdateInput').on('click', function (e) {
+        e.preventDefault();
+        $.confirm({
+            title: 'Are you sure ?',
+            content: 'Update this user  ',
+            buttons: {
+                confirm: function () {
+                    $('#submitUpdate').submit();
+                },
+                cancel: function () {
+                    $.alert('Canceled!');
+                },
+            },
+//            icon: 'fa fa-smile-o',
+            closeIcon: true,
+            animation: 'scale',
         });
     });
 
