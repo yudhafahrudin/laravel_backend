@@ -54,7 +54,6 @@
                                         <td>{{object_get($value, 'email')}}</td>
                                         <td>
                                             <a href="#" onclick="profileAJAX('{{object_get($value, 'username')}}')" data-toggle="modal" data-target="#exampleModalCenter" ><span class="label label-warning">Detail</span></a>
-                                            <a href="{{ route('show.edit.user',['id' =>object_get($value, 'id')])}}"><span class="label label-info">Edit</span></a>
 
                                         </td>
                                     </tr>

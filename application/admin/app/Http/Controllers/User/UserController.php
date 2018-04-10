@@ -8,21 +8,40 @@ use App\Http\Controllers\Controller;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
+use App\Traits\UploadImage;
 
 class UserController extends Controller {
 
     protected $request;
+
+    use UploadImage;
 
     public function __construct(Request $request) {
         parent::__construct();
         $this->request = $request;
     }
 
-    protected function validator(array $data) {
+    protected function validatorImage(array $data) {
         return Validator::make($data, [
-                    'name' => 'string|max:255',
-                    'email' => 'required|string|email|max:255|unique:users',
+                    'photo' => 'required|mimes:jpeg,png,jpg,gif,svg|max:1024'
         ]);
+    }
+
+    protected function validator(array $data, $type = null) {
+
+        $validator_requrement = [
+            'name' => 'string|max:255',
+        ];
+
+        $email_check = array_get($data, 'email');
+
+        $email_valid_array = ['email' => 'required|string|email|max:255|unique:users'];
+
+        if (!$email_check == null) {
+            $validator_requrement = array_merge($validator_requrement, $email_valid_array);
+        }
+
+        return Validator::make($data, $validator_requrement);
     }
 
     public function showEdit($id) {
@@ -49,22 +68,27 @@ class UserController extends Controller {
 
     protected function edit($id) {
 
-        $validator = $this->validator($this->request->all());
+        $validator = $this->validator($this->request->all(), 'edit');
         if ($validator->fails()) {
             return redirect()->back()->with(['message' => 'Your custom message here', 'status' => 'error']);
 //            return redirect()->back()->withErrors($validator);
         } else {
 
-            dd( object_get($this->request, 'email'));
             // store
-            $nerd = User::find($id);
-            $nerd->name = object_get($this->request, 'name');
-            $nerd->email = object_get($this->request, 'email');
-            $nerd->description = object_get($this->request, 'description');
-            $nerd->save();
+            $user = User::find($id);
+            $user->name = object_get($this->request, 'name');
+            $email = object_get($this->request, 'email');
+
+            ( $email ? $user->email = $email : '');
+
+            $user->description = object_get($this->request, 'description');
+            $user->save();
+
+//            $this->validatorImage($request->all())->validate();
+            $this->postImage($request);
 
             // redirect
-            return redirect()->back()->with(['message' => 'Your custom message here', 'status' => 'success']);
+            return redirect()->back()->with(['message' => 'User [' . object_get($user, 'username') . '] updated!', 'status' => 'success']);
 //            return redirect()->back()->with('message', 'User updated!');
         }
     }

@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\File;
+use App\Traits\UploadImage;
 
 class RegisterController extends Controller {
     /*
@@ -27,14 +28,10 @@ class RegisterController extends Controller {
       |
      */
 
-use RegistersUsers;
-
     protected $redirectTo = '/add_user';
-    protected $pathImageOriginal;
-    protected $pathImageThumbnail;
-    protected $pathImageTemp;
-    protected $pathThumb;
-    protected $pathOriginal;
+
+    use RegistersUsers;
+    use UploadImage;
 
     public function __construct() {
         parent::__construct();
@@ -56,7 +53,6 @@ use RegistersUsers;
     }
 
     protected function create(array $data) {
-
         return User::create([
                     'username' => $data['username'],
                     'name' => $data['name'],
@@ -64,8 +60,8 @@ use RegistersUsers;
                     'description' => $data['description'],
                     'password' => bcrypt($data['password']),
                     'created_by' => Auth::user()->username,
-                    'path_thumb' => $this->pathThumb,
-                    'path_original' => $this->pathOriginal,
+                    'path_thumb' => array_get($this->pathQuality, 'thumb'),
+                    'path_original' => array_get($this->pathQuality, 'original'),
         ]);
     }
 
@@ -83,42 +79,6 @@ use RegistersUsers;
 //        $this->guard()->login($user);
 
         return $this->registered($request, $user) ?: redirect($this->redirectPath());
-    }
-
-    public function postImage(Request $request) {
-        $photo = $request->file('photo');
-
-        // File named
-        $imagename = time() . '.' . $photo->getClientOriginalExtension();
-
-        // Random indefitier
-        $rand = \Carbon\Carbon::parse()->format('Ymd') . '/' . rand();
-        $this->pathImageTemp = '/user/images/profile/';
-        $this->pathImageThumbnail = $request->username . '/' . $rand . '/';
-
-        /************************  THUMBNAIL IMAGE *****************************/
-        $fullPath = $this->pathImageTemp . $this->pathImageThumbnail . 'thumb/';
-        // Make directory
-        $this->makeDirectory($fullPath);
-        // Generating save temp image
-        $thumbImg = Image::make($photo->getRealPath())->resize(200, 200);
-        $fileImage = $thumbImg->save($fullPath . $imagename);
-        // Save to storage disk
-        Storage::disk('public')->put($fullPath . $imagename, $fileImage->__toString());
-        // Path Tumb
-        $this->pathThumb = $this->pathImageThumbnail . 'thumb/' . $imagename;
-
-        /************************ ORIGINAL IMAGE *******************************/
-        $fullPath = $this->pathImageTemp . $this->pathImageThumbnail . 'original/';
-        // Make directory
-        $this->makeDirectory($fullPath);
-        // Generating save temp image
-        $originalImg = Image::make($photo->getRealPath());
-        $originalImg->save($fullPath . $imagename);
-        // Save to storage disk
-        Storage::disk('public')->put($fullPath . $imagename, $originalImg->__toString());
-        // Path Tumb
-        $this->pathOriginal = $this->pathImageThumbnail . 'original/' . $imagename;
     }
 
     public function registered(Request $request, $user) {

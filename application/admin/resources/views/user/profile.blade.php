@@ -38,20 +38,20 @@
                                 </div>
                                 <div class="white-box col-md-9">
                                     <div class="tab-pane active" id="profile">
-                                        <h3>{{$userFind->name}}</h3>
-                                        <small>
+                                        <h3>{{ ucwords($userFind->name) }}</h3>
+<!--                                        <small>
                                             <cite title="San Francisco, USA">
                                                 {{$userFind->username}} 
                                                 <i class="glyphicon glyphicon-map-marker"></i>
                                             </cite>
-                                        </small>
-                                        <br /><br />
+                                        </small>-->
+                                        <br />
                                         <p>
                                             <i class="fa fa-user-circle-o"></i> {{$userFind->username}}
                                             <br />
                                             <i class="glyphicon glyphicon-envelope"></i> {{$userFind->email}}
                                             <br />
-                                            <i class="fa fa-plus-square"></i> {{$userFind->created_at}}
+                                            <i class="fa fa-calendar"></i> {{$userFind->created_at->toDateString()}}
                                         </p>
 
                                     </div>
@@ -97,7 +97,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-12">Name</label>
                                                 <div class="col-md-12">
-                                                    <input type="text" name="name" placeholder="{{$userFind->name}}" class="form-control form-control-line" required> </div>
+                                                    <input type="text" name="name" placeholder="{{$userFind->name}}" class="form-control form-control-line" value="{{$userFind->name}}"  required> </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-12">Email</label>
@@ -107,8 +107,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-12">Description</label>
                                                 <div class="col-md-12">
-                                                    <textarea name="description" class="form-control form-control-line">{{$userFind->description}}
-                                                    </textarea>
+                                                    <textarea name="description" class="form-control form-control-line">{{$userFind->description}}</textarea>
                                                 </div>
                                             </div>
                                             <div class="form-group">
