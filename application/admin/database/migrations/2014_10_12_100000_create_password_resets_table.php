@@ -18,9 +18,6 @@ class CreatePasswordResetsTable extends Migration
             $table->string('token');
             $table->timestamp('created_at')->nullable();
         });
-        Schema::table('categories', function ($table) {
-            $table->softDeletes();
-        });
     }
 
     /**

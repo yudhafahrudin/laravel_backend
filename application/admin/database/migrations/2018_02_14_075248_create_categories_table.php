@@ -20,7 +20,6 @@ class CreateCategoriesTable extends Migration
             $table->string('code', 150)->unique();
             $table->string('name', 100);
             $table->text('description');
-            $table->integer('status')->default('1');
             $table->timestamps();
 		});
 	}
