@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\AdvancedCoding;
 
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\File;
 use App\Http\Controllers\Controller;
 
 class colectionController extends Controller {
@@ -24,6 +25,12 @@ class colectionController extends Controller {
             }
             #do the routine job, trigger a php function and what not.
         }
+    }
+    
+    protected function mkdir() {
+        $pathImage = 'yuda/123321.txt';
+        File::exists($pathImage, 0777) or
+                File::makeDirectory($pathImage, 0777, true);
     }
 
 }
