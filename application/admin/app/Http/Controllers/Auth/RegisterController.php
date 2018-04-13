@@ -11,8 +11,6 @@ use Illuminate\Support\Facades\Validator;
 use Illuminate\Foundation\Auth\RegistersUsers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
-use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Facades\File;
 use App\Traits\UploadImage;
 
 class RegisterController extends Controller {
@@ -73,7 +71,7 @@ class RegisterController extends Controller {
 
         $this->validator($request->all())->validate();
         $this->validatorImage($request->all())->validate();
-        $this->postImage($request);
+        $this->saveImage($request);
         event(new Registered($user = $this->create($request->all())));
 
 //        $this->guard()->login($user);
