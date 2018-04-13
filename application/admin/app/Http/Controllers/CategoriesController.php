@@ -32,13 +32,14 @@ class CategoriesController extends Controller {
 
     public function index() {
 
-        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
-        $this->repository->pushCriteria(\App\Criteria\MyDefaultCriteria::class);
+//        $this->repository->pushCriteria(app('Prettus\Repository\Criteria\RequestCriteria'));
+//        $this->repository->pushCriteria(\App\Criteria\MyDefaultCriteria::class);
         $categories = $this->repository->all()->sortByDesc('id');
         
-        $categories_deleted = $this->repository->skipCriteria()->findWhereNotIn('status', [1]);
+//        $categories_deleted = $this->repository->skipCriteria()->findWhereNotIn('status', [1]);
+        $categories_deleted = 2;
         $categories_total = count($categories);
-        $categories_deleted_total = count($categories_deleted);
+        $categories_deleted_total = 2;
 
         if (request()->wantsJson()) {
 
