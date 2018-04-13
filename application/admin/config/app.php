@@ -44,7 +44,6 @@ return [
         App\Providers\RepositoryServiceProvider::class, // For Repositories  Binding
         // For Spatie
         Spatie\Permission\PermissionServiceProvider::class,
-        Spatie\UrlSigner\Laravel\UrlSignerServiceProvider::class,
         Intervention\Image\ImageServiceProvider::class,
         /*
          * Application Service Providers...

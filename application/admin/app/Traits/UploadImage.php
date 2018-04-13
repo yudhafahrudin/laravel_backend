@@ -47,8 +47,8 @@ trait UploadImage {
     }
 
     protected function makeDirectory($pathImage) {
-        File::exists($pathImage, 0777) or
-                File::makeDirectory($pathImage, 0777, true);
+        File::exists($pathImage, 0775) or
+                File::makeDirectory($pathImage, 0775, true);
     }
 
 }
