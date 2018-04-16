@@ -30,7 +30,7 @@ class UserListController extends Controller {
         
         $userAll = User::all()->sortByDesc('updated_at');
 
-        return view('user.userList', array(
+        return view('users.userList', array(
             'userAll' => $userAll,
             'listNomor' => 1,
             'title' => 'User')
