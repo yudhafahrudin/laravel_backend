@@ -46,12 +46,12 @@ class UserController extends Controller {
 
     public function showEdit($id) {
         $user = User::find($id);
-        return view('user.edit', array('title' => 'User', 'user_edit' => $user));
+        return view('users.edit', array('title' => 'User', 'user_edit' => $user));
     }
 
     public function showDetailUser($id) {
         $userFind = User::find($id);
-        return view('user.showUserDetail', array(
+        return view('users.showUserDetail', array(
             'userFind' => $userFind,
             'title' => 'User')
         );
@@ -59,15 +59,14 @@ class UserController extends Controller {
 
     public function showProfileUser($username) {
         $userFind = User::where('username', $username)->get();
-
-        return view('user.profile', array(
+        
+        return view('users.profile', array(
             'userFind' => $userFind[0],
             'title' => $userFind[0]->name)
         );
     }
 
     protected function edit($id) {
-
         $validator = $this->validator($this->request->all(), 'edit');
         if ($validator->fails()) {
             return redirect()->back()->with(['message' => 'Your custom message here', 'status' => 'error']);
@@ -85,7 +84,7 @@ class UserController extends Controller {
             $user->save();
 
 //            $this->validatorImage($request->all())->validate();
-            $this->postImage($request);
+//            $this->saveImage($request);
 
             // redirect
             return redirect()->back()->with(['message' => 'User [' . object_get($user, 'username') . '] updated!', 'status' => 'success']);
@@ -94,16 +93,15 @@ class UserController extends Controller {
     }
 
     protected function delete($user) {
-
         try {
 
             $user = User::find($user);
             $userName = object_get($user, 'name');
             $user->delete();
 
-            return redirect('user')->with('message', 'User [ ' . $userName . ' ] deleted');
+            return redirect(route('show.user'))->with('message', 'User [ ' . $userName . ' ] deleted');
         } catch (ValidatorException $e) {
-            return redirect('user')->with('message', $e->getMessageBag());
+            return redirect(route('show.user'))->with('message', $e->getMessageBag());
         }
     }
 
