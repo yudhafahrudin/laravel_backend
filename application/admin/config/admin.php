@@ -22,7 +22,7 @@ return [
                 'addUser' => [
                     'name' => 'User',
                     'icon' => '',
-                    'url' => 'user',
+                    'url' => 'users',
                 ],
             ],
         ],
@@ -33,7 +33,7 @@ return [
                 'userTrash' => [
                     'name' => 'User Trashed',
                     'icon' => '',
-                    'url' => 'user/trash/all',
+                    'url' => 'users/trash/all',
                 ],
             ],
         ],
