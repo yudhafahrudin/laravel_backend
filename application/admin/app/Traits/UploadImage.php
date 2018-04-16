@@ -25,10 +25,10 @@ trait UploadImage {
 
         // Initialize variable in upload images
         $rand = \Carbon\Carbon::parse()->format('Y-m-d') . '/' . rand();
-        $this->pathImageTemp = '/user/images/profile/';
+        $this->pathImageTemp = 'user/images/profile/';
         $this->pathImage = $request->username . '/' . $rand . '/';
         $image_quality = ['original', 'thumb'];
-
+    
         foreach ($image_quality as $value) {
             $fullPath = $this->pathImageTemp . $this->pathImage . $value . '/';
             // Generating save temp image
@@ -37,18 +37,18 @@ trait UploadImage {
             
             // Make directory
             $this->makeDirectory($fullPath);
-            
             $fileImage = $thumbImg->save($fullPath . $imagename);
-            // Save to storage disk
+//            // Save to storage disk
             \Storage::disk('public')->put($fullPath . $imagename, $fileImage->__toString());
-            // Path quality
+//            // Path quality
             $this->pathQuality[$value] = $this->pathImage . $value . '/' . $imagename;
         }
     }
 
     protected function makeDirectory($pathImage) {
-        File::exists($pathImage, 0775) or
-                File::makeDirectory($pathImage, 0775, true);
+       
+        File::exists($pathImage, 0777) or
+                File::makeDirectory($pathImage, 0777, true);
     }
 
 }
