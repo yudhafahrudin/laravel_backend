@@ -13,7 +13,7 @@ class UserTrashController extends Controller {
 
     protected function show() {
         $userTrashed = User::onlyTrashed()->get()->sortByDesc('updated_at');
-        return view('user.userTrash', array(
+        return view('users.userTrash', array(
             'userAllTrashed' => $userTrashed,
             'listNomor' => 1,
             'title' => 'User Trashed')
@@ -27,9 +27,9 @@ class UserTrashController extends Controller {
             $userName = object_get($user, 'username');
             $user->restore();
 
-            return redirect('/user/trash/all')->with('message', 'User [ ' . $userName . ' ] restored');
+            return redirect(route('show.user'))->with('message', 'User [ ' . $userName . ' ] restored');
         } catch (ValidatorException $e) {
-            return redirect('/user/trash/all')->with('message', $e->getMessageBag());
+            return redirect(route('show.user'))->with('message', $e->getMessageBag());
         }
     }
 
