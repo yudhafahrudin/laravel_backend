@@ -28,7 +28,7 @@ class colectionController extends Controller {
     }
     
     protected function mkdir() {
-        $pathImage = 'yuda/123321.txt';
+        $pathImage = 'user/images/profile/adasdasd/2018-04-16/1114961204/original/';
         File::exists($pathImage, 0777) or
                 File::makeDirectory($pathImage, 0777, true);
     }
