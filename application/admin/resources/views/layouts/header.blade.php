@@ -17,7 +17,9 @@
         <link href="{{ asset('material/admin/css/datepicker3.css') }}" rel="stylesheet">
         <link href="{{ asset('material/admin/css/jquery-confirm.css') }}" rel="stylesheet">
         <link href="{{ asset('material/admin/css/bootstrap-imageupload.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('material/admin/css/jquery.loading.min.css') }}" rel="stylesheet">
         <link href="{{ asset('material/admin/css/styles.css') }}" rel="stylesheet">
+        <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
         
         <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
        

@@ -78,18 +78,22 @@
 
 
 <!-- Scripts -->
-<script src="{{ asset('js/app.js') }}"></script>
+<!--<script src="{{ asset('js/app.js') }}"></script>-->
 <script src="{{ asset('material/admin/js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('material/admin/js/bootstrap.min.js') }}"></script>
 <script src="{{ asset('material/admin/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('material/admin/js/jquery-confirm.js') }}"></script>
 <script src="{{ asset('material/admin/js/bootstrap-imageupload.min.js') }}"></script>
+<script src="{{ asset('material/admin/js/notify.js') }}"></script>
+<script src="{{ asset('material/admin/js/jquery.loading.min.js') }}"></script>
 <script src="{{ asset('material/admin/js/custom.js') }}"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>
+
 
 <script type="text/javascript">
 function profileAJAX(username) {
     $.ajax({
-        url: "{{url('user/profile/')}}/" + username,
+        url: "{{url('users/profile/')}}/" + username,
         dataType: 'text',
         type: 'get',
         contentType: 'application/x-www-form-urlencoded',
@@ -131,4 +135,21 @@ $('#myModal').on('shown.bs.modal', function () {
         $(this).blur();
     });
 </script>
+
+<script>
+    function notifyMessage(type, message) {
+        $.notify(
+                message,
+                {position: "top center", className: type}
+        );
+    }
+</script>
+<script>
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+</script>
+
 @endsection
