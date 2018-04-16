@@ -4,7 +4,7 @@
 
 @section('content')
 
-<div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
+<div id="userListController" class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
     <div class="row">
         {{ Breadcrumbs::render('user') }}
         <br>
@@ -34,18 +34,18 @@
                 <div class="panel-body">
                     <div class="canvas-wrapper">
                         <div class="main-chart" id="line-chart" height="200" width="600">
-                            <table id="myTable" class="table table-striped table-bordered">
+                            <table data-toggle="table" data-show-refresh="true" data-show-columns="true" data-search="true" data-pagination="true" data-sort-name="id" data-sort-order="asc" class="table table-bordered">
+                            <!--<table data-toggle="table" id="myTable" class="table table-striped table-bordered">-->
                                 <thead>
                                     <tr>
-                                        <th>No</th>
-                                        <th>Username</th>
-                                        <th>Name</th>
-                                        <th>Email</th>
-                                        <th>Action</th>
+                                        <th data-field="id">No</th>
+                                        <th data-field="username" >Username</th>
+                                        <th data-field="name" >Name</th>
+                                        <th data-field="email" >Email</th>
+                                        <th data-field="action"  >Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-
                                     @foreach ($userAll as $value)
                                     <tr>
                                         <td>{{$listNomor++}}</td>
