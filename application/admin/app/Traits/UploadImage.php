@@ -44,6 +44,10 @@ trait UploadImage {
             $this->pathQuality[$value] = $this->pathImage . $value . '/' . $imagename;
         }
     }
+    
+    protected function resize(){
+            
+    }
 
     protected function makeDirectory($pathImage) {
        
