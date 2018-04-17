@@ -84,7 +84,7 @@
 <script src="{{ asset('material/admin/js/jquery.dataTables.min.js') }}"></script>
 <script src="{{ asset('material/admin/js/jquery-confirm.js') }}"></script>
 <script src="{{ asset('material/admin/js/bootstrap-imageupload.min.js') }}"></script>
-<script src="{{ asset('material/admin/js/notify.js') }}"></script>
+<script src="{{ asset('material/admin/js/notify.min.js') }}"></script>
 <script src="{{ asset('material/admin/js/jquery.loading.min.js') }}"></script>
 <script src="{{ asset('material/admin/js/custom.js') }}"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.js"></script>

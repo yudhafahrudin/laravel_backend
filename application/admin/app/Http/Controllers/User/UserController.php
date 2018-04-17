@@ -59,7 +59,7 @@ class UserController extends Controller {
 
     public function showProfileUser($username) {
         $userFind = User::where('username', $username)->get();
-        
+
         return view('users.profile', array(
             'userFind' => $userFind[0],
             'title' => $userFind[0]->name)
@@ -67,9 +67,14 @@ class UserController extends Controller {
     }
 
     protected function edit($id) {
+        
         $validator = $this->validator($this->request->all(), 'edit');
         if ($validator->fails()) {
-            return redirect()->back()->with(['message' => 'Your custom message here', 'status' => 'error']);
+            $response = array(
+                'status' => 'error',
+                'msg' => $validator->messages(),
+            );
+            return response()->json($response);
 //            return redirect()->back()->withErrors($validator);
         } else {
 
@@ -85,10 +90,13 @@ class UserController extends Controller {
 
 //            $this->validatorImage($request->all())->validate();
 //            $this->saveImage($request);
-
             // redirect
-            return redirect()->back()->with(['message' => 'User [' . object_get($user, 'username') . '] updated!', 'status' => 'success']);
-//            return redirect()->back()->with('message', 'User updated!');
+//            return redirect()->back()->with(['message' => 'User [' . object_get($user, 'username') . '] updated!', 'status' => 'success']);
+            $response = array(
+                'status' => 'success',
+                'msg' => 'User [' . object_get($user, 'username') . '] updated!',
+            );
+            return response()->json($response);
         }
     }
 

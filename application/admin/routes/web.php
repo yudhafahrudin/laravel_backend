@@ -18,7 +18,7 @@ Route::middleware(['auth'])->group(function () {
             Route::get('/edit/{id}', 'UserController@showEdit')->name('show.edit.user');
             Route::post('/{id}/delete', 'UserController@delete')->name('delete.user');
             Route::get('/{id}/restore', 'UserTrashController@restore')->name('restore.user');
-            Route::put('/{id}/edit', 'UserController@edit')->name('edit.user');
+            Route::post('/{id}/edit', 'UserController@edit')->name('edit.user');
             Route::delete('/{id}/destroy', 'UserTrashController@destroy')->name('destroy.user');
             Route::get('/profile/{username}', 'UserController@showProfileUser')->name('user.profile');
         });

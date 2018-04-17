@@ -102,7 +102,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-12">Email</label>
                                                 <div class="col-md-12">
-                                                    <input type="email" id="email" name="email" placeholder="{{$userFind->email}}" class="form-control form-control-line" value="{{$userFind->email}}"> </div>
+                                                    <input type="email" id="email" name="email" placeholder="{{$userFind->email}}" class="form-control form-control-line" > </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-12">Description</label>
@@ -188,7 +188,7 @@
             var name = $("#name").val();
             var email = $("#email").val();
             var description = $("#description").val();
-            
+
             e.preventDefault();
             $.confirm({
                 title: 'Are you sure ?',
@@ -198,10 +198,20 @@
                         $.ajax({
                             url: actionurl,
                             dataType: 'JSON',
-                            type:'PUT',
+                            type: 'POST',
                             data: {name: name, email: email, description: description},
+
+                            beforeSend: function () {
+                                setInterval(function () {
+                                    $('.modal-content').loading('toggle');
+                                }, 1000);
+                            },
+                            complete: function () {
+//                                $("#loading").hide();
+                            },
                             success: function (data) {
-                                console.log(data);
+                                notifyMessage('success', 'data berhasil diupdate');
+//                                $("#data").html("data receieved");
                             }
                         });
                     },
@@ -240,16 +250,6 @@
 //        maxHeight: 250,
             maxFileSizeKb: 2048
         });
-
-//        function doSubmit(e) {
-//            $(e).submit(function (event) {
-//                alert("Handler for .submit() called.");
-//                event.preventDefault();
-//            });
-//            setInterval(function () {
-//                $('.modal-content').loading('toggle');
-//            }, 1000);
-//        }
 
     });
 </script>

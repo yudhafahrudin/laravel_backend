@@ -2,6 +2,7 @@
 
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Carbon;
 
 class DatabaseSeeder extends Seeder {
 
@@ -17,8 +18,8 @@ class DatabaseSeeder extends Seeder {
             'username' => 'superadmin',
             'email' => str_random(10) . '@gmail.com',
             'password' => bcrypt('admin123'),
-            'created_at' => \Carbon::parse('1996-02-26'),
-            'updated_at' => \Carbon::parse('1996-02-26')
+            'created_at' => Carbon::parse('1996-02-26'),
+            'updated_at' => Carbon::parse('1996-02-26')
         ]);
     }
 
