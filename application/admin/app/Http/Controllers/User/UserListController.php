@@ -1,4 +1,5 @@
 <?php
+
 /*
  * Since: 16-02-208
  * Author:  Taichu
@@ -26,9 +27,17 @@ class UserListController extends Controller {
         parent::__construct();
     }
 
-    public function show() {
-        
+    public function show(Request $request) {
+
         $userAll = User::all()->sortByDesc('updated_at');
+        
+        if($request->ajax()) {
+//            return $userAll->toJson();
+            return ["data" => [
+                ["name" => 'Yuda',"email" => 'adasd', "username" => 'superadmin'],
+                ["name" => 'Yuda',"email" => 'adasd', "username" => 'superadmin']
+                ]];
+        }
 
         return view('users.userList', array(
             'userAll' => $userAll,
