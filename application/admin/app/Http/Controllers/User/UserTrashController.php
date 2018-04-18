@@ -11,6 +11,7 @@ class UserTrashController extends Controller {
         parent::__construct();
     }
 
+    // GET: /users/trash/all
     protected function show() {
         $userTrashed = User::onlyTrashed()->get()->sortByDesc('updated_at');
         return view('users.userTrash', array(
@@ -42,13 +43,13 @@ class UserTrashController extends Controller {
 
             // Logging action
             $this->loggingInfo('User with username ' . $userNameKey . ' destroyed', $user->toArray());
-            
+
             // If logging success user data will destroyed
             $user->forceDelete();
 
-            return redirect('/user/trash/all')->with('message', 'User [ ' . $userNameKey . ' ] destroyed');
+            return redirect(route('show.trash.user'))->with('message', 'User [ ' . $userNameKey . ' ] destroyed');
         } catch (ValidatorException $e) {
-            return redirect('/user/trash/all')->with('message', $e->getMessageBag());
+            return redirect(route('show.trash.user'))->with('message', $e->getMessageBag());
         }
     }
 
