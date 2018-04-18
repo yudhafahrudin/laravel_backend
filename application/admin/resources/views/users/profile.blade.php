@@ -31,7 +31,7 @@
                                     <div class="user-bg">
                                         <div class="user-content">
                                             @unless (!Auth::user())
-                                            <img style="width: 100%" src="{{ url('storage/user/images/profile/'.$userFind->path_thumb)}}" class="img-responsive" alt="">
+                                            <img style="width: 100%" src="{{ url('storage/admin/user/images/profile/'.$userFind->path_thumb)}}" class="img-responsive" alt="">
                                             @endunless
                                         </div>
                                     </div>
@@ -70,7 +70,7 @@
 
                                                 <div class="file-tab">
                                                     @unless (!Auth::user())
-                                                    <img style="width: 100%" src="{{ url('images/profile/'.$userFind->path_thumb) }}" alt="Image preview" class="thumbnail img-responsive">
+                                                    <img style="width: 100%" src="{{ url('storage/admin/user/images/profile/'.$userFind->path_thumb) }}" alt="Image preview" class="thumbnail img-responsive">
                                                     @endunless
                                                     <label class="btn btn-default btn-file">
                                                         <span>Browse</span>
@@ -128,7 +128,7 @@
                                     <div class="user-bg">
                                         <div class="user-content">
                                             @unless (!Auth::user())
-                                            <img style="width: 100%" src="{{ url('images/profile/'.$userFind->path_thumb) }}" class="img-responsive" alt="">
+                                            <img style="width: 100%" src="{{ url('storage/admin/user/images/profile/'.$userFind->path_thumb) }}" class="img-responsive" alt="">
                                             @endunless
                                         </div>
                                     </div>
@@ -195,24 +195,11 @@
                 content: 'Update this user  ',
                 buttons: {
                     confirm: function (e) {
-                        $.ajax({
-                            url: actionurl,
-                            dataType: 'JSON',
-                            type: 'POST',
-                            data: {name: name, email: email, description: description},
-
-                            beforeSend: function () {
-                                setInterval(function () {
-                                    $('.modal-content').loading('toggle');
-                                }, 1000);
-                            },
-                            complete: function () {
-//                                $("#loading").hide();
-                            },
-                            success: function (data) {
-                                notifyMessage('success', 'data berhasil diupdate');
-//                                $("#data").html("data receieved");
-                            }
+                        doSubmit({
+                            actionurl: actionurl,
+                            name: name,
+                            email: email,
+                            description: description
                         });
                     },
                     cancel: function () {
@@ -251,5 +238,26 @@
             maxFileSizeKb: 2048
         });
 
+function doSubmit(e){
+        $.ajax({
+            url: e.actionurl,
+            dataType: 'JSON',
+            type: 'POST',
+            data: {name: e.name, email: e.email, description: e.description},
+
+            beforeSend: function () {
+//                setInterval(function () {
+//                    $('.modal-content').loading('toggle');
+//                }, 1000);
+            },
+            complete: function () {
+//                                $("#loading").hide();
+            },
+            success: function (data) {
+                notifyMessage(data.status, data.msg);
+//                                $("#data").html("data receieved");
+            }
+        });
+    }
     });
 </script>
