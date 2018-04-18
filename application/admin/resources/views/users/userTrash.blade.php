@@ -5,8 +5,10 @@
 @section('content')
 
 <div class="col-sm-9 col-sm-offset-3 col-lg-10 col-lg-offset-2 main">
-    @yield('breadcumb')
-
+    <div class="row">
+        {{ Breadcrumbs::render('user') }}
+        <br>
+    </div>
     <div class="row">
         <div class="col-md-12">
             @if(session()->has('message'))
@@ -24,7 +26,7 @@
                 <div class="panel-body">
                     <div class="canvas-wrapper">
                         <div class="main-chart" id="line-chart" height="200" width="600">
-                            <table id="myTable" class="table table-striped table-bordered">
+                            <table id="myTable" class="table cell-border hover row-border">
                                 <thead>
                                     <tr>
                                         <th>No</th>

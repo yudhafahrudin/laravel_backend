@@ -12,7 +12,7 @@ $collapse_id = 0;
         <div class="profile-userpic">
 
             @unless (!Auth::user())
-        <img src="{{ url('storage/user/images/profile/'.Auth::user()->path_thumb) }}" class="img-responsive" alt="">
+        <img src="{{ url('storage/admin/user/images/profile/'.Auth::user()->path_thumb) }}" class="img-responsive" alt="">
             @endunless
         </div>
         <div class="profile-usertitle">

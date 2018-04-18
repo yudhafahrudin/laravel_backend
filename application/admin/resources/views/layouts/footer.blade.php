@@ -81,7 +81,8 @@
 <!--<script src="{{ asset('js/app.js') }}"></script>-->
 <script src="{{ asset('material/admin/js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('material/admin/js/bootstrap.min.js') }}"></script>
-<script src="{{ asset('material/admin/js/jquery.dataTables.min.js') }}"></script>
+<!--<script src="{{ asset('material/admin/js/jquery.dataTables.min.js') }}"></script>-->
+<script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
 <script src="{{ asset('material/admin/js/jquery-confirm.js') }}"></script>
 <script src="{{ asset('material/admin/js/bootstrap-imageupload.min.js') }}"></script>
 <script src="{{ asset('material/admin/js/notify.min.js') }}"></script>
@@ -91,32 +92,134 @@
 
 
 <script type="text/javascript">
-function profileAJAX(username) {
-    $.ajax({
-        url: "{{url('users/profile/')}}/" + username,
-        dataType: 'text',
-        type: 'get',
-        contentType: 'application/x-www-form-urlencoded',
-        data: {'username': username},
-        success: function (data, textStatus, jQxhr) {
-            $('.modal-body').html(data);
-        },
-        error: function (jqXhr, textStatus, errorThrown) {
-            console.log(errorThrown);
-        }
-    });
-}
-
 $(document).ready(function () {
-    $('#myTable').DataTable();
+
+    $('#submitDeleteInput').on('click', function (e) {
+        e.preventDefault();
+        $.confirm({
+            title: 'Are you sure ?',
+            content: 'Delete this user  ',
+            buttons: {
+                confirm: function () {
+                    $('#submitDelete').submit();
+                },
+                cancel: function () {
+                    $.alert('Canceled!');
+                },
+            },
+//            icon: 'fa fa-smile-o',
+            closeIcon: true,
+            animation: 'scale',
+        });
+    });
+
+    $(document).on('submit', 'form#submitUpdate', function (e) {
+        var actionurl = e.currentTarget.action;
+        var name = $("#name").val();
+        var email = $("#email").val();
+        var description = $("#description").val();
+
+        e.preventDefault();
+        $.confirm({
+            title: 'Are you sure ?',
+            content: 'Update this user  ',
+            buttons: {
+                confirm: function (e) {
+                    doSubmit({
+                        actionurl: actionurl,
+                        name: name,
+                        email: email,
+                        description: description
+                    });
+                },
+                cancel: function () {
+                },
+            },
+//            icon: 'fa fa-smile-o',
+            closeIcon: true,
+            animation: 'scale',
+        });
+    });
+
+
+    var $imageupload = $('.imageupload');
+    $imageupload.imageupload({
+        allowedFormats: ["jpg", "jpeg", "png", "gif"],
+        maxWidth: 200,
+//        maxHeight: 250,
+        maxFileSizeKb: 2048
+    });
+
+    function doSubmit(e) {
+        $.ajax({
+            url: e.actionurl,
+            dataType: 'JSON',
+            type: 'POST',
+            data: {name: e.name, email: e.email, description: e.description},
+
+            beforeSend: function () {
+//                setInterval(function () {
+//                    $('.modal-content').loading('toggle');
+//                }, 1000);
+            },
+            complete: function () {
+//                                $("#loading").hide();
+            },
+            success: function (data) {
+                notifyMessage(data.status, data.msg);
+//                                $("#data").html("data receieved");
+            }
+        });
+    }
 });
-$('#myModal').on('shown.bs.modal', function () {
-    $('#myInput').focus()
-})
 </script>
 
+<script type="text/javascript">
+    function profileAJAX(username) {
+        $.ajax({
+            url: "{{url('users/profile/')}}/" + username,
+            dataType: 'text',
+            type: 'get',
+            contentType: 'application/x-www-form-urlencoded',
+            data: {'username': username},
+            beforeSend: function () {
+                console.log('empty modal');
+            },
+            success: function (data, textStatus, jQxhr) {
+//            $('.modal-body').remove();
+                $('.modal-body').html(data);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                console.log(errorThrown);
+            }
+        });
+    }
 
-<script>
+    $(document).ready(function () {
+//        $('#myTable').DataTable();
+//
+        var table = $('#myTable').DataTable({
+            "processing": true,
+            ajax: {
+                url: 'http://localhost/laravel_backend/public/users',
+            },
+            "columns": [
+                {data: 'username'},
+                {data: 'name'},
+                {data: 'email'},
+            ]
+
+        });
+//        setInterval(function () {
+//            table.ajax.reload();
+//        }, 1000);
+
+    });
+
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').focus()
+    })
+
     var $imageupload = $('.imageupload');
     $imageupload.imageupload();
 
@@ -134,22 +237,20 @@ $('#myModal').on('shown.bs.modal', function () {
         $imageupload.imageupload('reset');
         $(this).blur();
     });
-</script>
 
-<script>
     function notifyMessage(type, message) {
         $.notify(
                 message,
                 {position: "top center", className: type}
         );
     }
-</script>
-<script>
     $.ajaxSetup({
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
     });
+
+
 </script>
 
 @endsection

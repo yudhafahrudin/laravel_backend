@@ -119,7 +119,9 @@
                                                 </div>
                                             </div>
                                         </form>
-
+                                        <button id="testajax" class="btn btn-primary">
+                                            Test ajax
+                                        </button>
                                     </div>
                                 </div>
                             </div>
@@ -161,103 +163,20 @@
         </div>
     </div>
 </div>
-<script type="text/javascript">
-    $(document).ready(function () {
+<script>
 
-        $('#submitDeleteInput').on('click', function (e) {
-            e.preventDefault();
-            $.confirm({
-                title: 'Are you sure ?',
-                content: 'Delete this user  ',
-                buttons: {
-                    confirm: function () {
-                        $('#submitDelete').submit();
-                    },
-                    cancel: function () {
-                        $.alert('Canceled!');
-                    },
-                },
-//            icon: 'fa fa-smile-o',
-                closeIcon: true,
-                animation: 'scale',
-            });
-        });
-
-        $(document).on('submit', 'form#submitUpdate', function (e) {
-            var actionurl = e.currentTarget.action;
-            var name = $("#name").val();
-            var email = $("#email").val();
-            var description = $("#description").val();
-
-            e.preventDefault();
-            $.confirm({
-                title: 'Are you sure ?',
-                content: 'Update this user  ',
-                buttons: {
-                    confirm: function (e) {
-                        doSubmit({
-                            actionurl: actionurl,
-                            name: name,
-                            email: email,
-                            description: description
-                        });
-                    },
-                    cancel: function () {
-                    },
-                },
-//            icon: 'fa fa-smile-o',
-                closeIcon: true,
-                animation: 'scale',
-            });
-        });
-
-//        $('#submitUpdate').on('click', function (e) {
-//            e.preventDefault();
-//            $.confirm({
-//                title: 'Are you sure ?',
-//                content: 'Update this user  ',
-//                buttons: {
-//                    confirm: function () {
-//                        doSubmit();
-//                    },
-//                    cancel: function () {
-//                        $.alert('Canceled!');
-//                    },
-//                },
-////            icon: 'fa fa-smile-o',
-//                closeIcon: true,
-//                animation: 'scale',
-//            });
-//        });
-
-        var $imageupload = $('.imageupload');
-        $imageupload.imageupload({
-            allowedFormats: ["jpg", "jpeg", "png", "gif"],
-            maxWidth: 200,
-//        maxHeight: 250,
-            maxFileSizeKb: 2048
-        });
-
-function doSubmit(e){
+    $('#testajax').on('click', function () {
+        alert('dasda');
         $.ajax({
-            url: e.actionurl,
-            dataType: 'JSON',
-            type: 'POST',
-            data: {name: e.name, email: e.email, description: e.description},
-
+            url: 'http://localhost/laravel_backend/public/users',
+            type: 'GET',
             beforeSend: function () {
-//                setInterval(function () {
-//                    $('.modal-content').loading('toggle');
-//                }, 1000);
             },
             complete: function () {
-//                                $("#loading").hide();
+
             },
             success: function (data) {
-                notifyMessage(data.status, data.msg);
-//                                $("#data").html("data receieved");
             }
         });
-    }
     });
 </script>
