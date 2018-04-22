@@ -119,9 +119,7 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <button id="testajax" class="btn btn-primary">
-                                            Test ajax
-                                        </button>
+
                                     </div>
                                 </div>
                             </div>
@@ -163,20 +161,3 @@
         </div>
     </div>
 </div>
-<script>
-
-    $('#testajax').on('click', function () {
-        alert('dasda');
-        $.ajax({
-            url: 'http://localhost/laravel_backend/public/users',
-            type: 'GET',
-            beforeSend: function () {
-            },
-            complete: function () {
-
-            },
-            success: function (data) {
-            }
-        });
-    });
-</script>
