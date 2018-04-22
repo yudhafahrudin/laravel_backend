@@ -75,7 +75,6 @@ class UserController extends Controller {
                 'msg' => $validator->messages(),
             );
             return response()->json($response);
-//            return redirect()->back()->withErrors($validator);
         } else {
 
             // store
