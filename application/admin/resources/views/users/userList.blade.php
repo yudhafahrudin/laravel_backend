@@ -34,7 +34,7 @@
                 <div class="panel-body">
                     <div class="canvas-wrapper">
                         <div class="main-chart" id="line-chart" height="200" width="600">
-                            <!--<table data-toggle="table" data-show-refresh="true" data-show-columns="true" data-search="true" data-pagination="true" data-sort-name="id" data-sort-order="asc" class="table table-bordered">-->
+                           <!--<table data-toggle="table" data-show-refresh="true" data-show-columns="true" data-search="true" data-pagination="true" data-sort-name="id" data-sort-order="asc" class="table table-bordered">-->
                             <table id="myTable" class="table cell-border hover row-border">
                                 <thead>
                                     <tr>
@@ -45,7 +45,7 @@
                                         <th data-field="action"  >Action</th>
                                     </tr>
                                 </thead>
-<!--                                <tbody>
+                                <tbody>
                                     @foreach ($userAll as $value)
                                     <tr>
                                         <td>{{$listNomor++}}</td>
@@ -53,13 +53,21 @@
                                         <td>{{object_get($value, 'name')}}</td>
                                         <td>{{object_get($value, 'email')}}</td>
                                         <td>
-                                            <a href="#" onclick="profileAJAX('{{object_get($value, 'username')}}')" data-toggle="modal" data-target="#exampleModalCenter" ><span class="label label-warning">Detail</span></a>
+                                            <a href="#"
+                                               onclick="profileAjax('{{object_get($value, 'username')}}')"
+                                               data-username="{{object_get($value, 'username')}}"
+                                               data-url="{{url('users/profile/')}}/"
+                                               data-toggle="modal" 
+                                               data-target="#exampleModalCenter" >
+                                                <span class="label label-warning">
+                                                    Detail
+                                                </span>
+                                            </a>
 
                                         </td>
                                     </tr>
                                     @endforeach
-
-                                </tbody>-->
+                                </tbody>
                                 <tfoot>
                                     <tr>
                                         <th data-field="id">No</th>
@@ -68,7 +76,7 @@
                                         <th data-field="email" >Email</th>
                                         <th data-field="action"  >Action</th>
                                     </tr>
-                                </tfoot>>
+                                </tfoot>
                             </table>
 
                         </div>
@@ -79,6 +87,7 @@
             </div>
         </div>
     </div>
+    <div id="testerr"></div>
 </div>	<!--/.main-->
 
 <div class="modal fade bd-example-modal-lg" id="exampleModalCenter" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
@@ -102,5 +111,4 @@
         </div>
     </div>
 </div>
-
 @endsection
