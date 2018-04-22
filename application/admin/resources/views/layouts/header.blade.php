@@ -22,7 +22,8 @@
     <link href="{{ asset('material/admin/css/styles.css') }}" rel="stylesheet">
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/bootstrap-table/1.12.1/bootstrap-table.min.css">
 
-    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">
+    <!--<link href="https://fonts.googleapis.com/css?family=Montserrat:300,300i,400,400i,500,500i,600,600i,700,700i" rel="stylesheet">-->
+    <script src="{{ asset('material/admin/js/jquery-3.3.1.min.js') }}"></script>
     <style>
         /*
      * Table styles
@@ -382,5 +383,6 @@
             .dataTables_wrapper .dataTables_filter {
                 margin-top: 0.5em; } }
     </style>
+    
 </head>
 @endsection
