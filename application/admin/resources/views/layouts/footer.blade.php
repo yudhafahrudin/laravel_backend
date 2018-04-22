@@ -79,7 +79,6 @@
 
 <!-- Scripts -->
 <!--<script src="{{ asset('js/app.js') }}"></script>-->
-<script src="{{ asset('material/admin/js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('material/admin/js/bootstrap.min.js') }}"></script>
 <!--<script src="{{ asset('material/admin/js/jquery.dataTables.min.js') }}"></script>-->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
@@ -175,41 +174,34 @@ $(document).ready(function () {
 </script>
 
 <script type="text/javascript">
-    function profileAJAX(username) {
-        $.ajax({
-            url: "{{url('users/profile/')}}/" + username,
-            dataType: 'text',
-            type: 'get',
-            contentType: 'application/x-www-form-urlencoded',
-            data: {'username': username},
-            beforeSend: function () {
-                console.log('empty modal');
-            },
-            success: function (data, textStatus, jQxhr) {
-//            $('.modal-body').remove();
-                $('.modal-body').html(data);
-            },
-            error: function (jqXhr, textStatus, errorThrown) {
-                console.log(errorThrown);
-            }
-        });
-    }
 
     $(document).ready(function () {
-//        $('#myTable').DataTable();
+        $('#myTable').DataTable();
 //
-        var table = $('#myTable').DataTable({
-            "processing": true,
-            ajax: {
-                url: 'http://localhost/laravel_backend/public/users',
-            },
-            "columns": [
-                {data: 'username'},
-                {data: 'name'},
-                {data: 'email'},
-            ]
+//        var table = $('#myTable').DataTable({
+//            "processing": true,
+//            "ajax": {
+//                url: 'http://localhost/laravel_backend/public/users',
+//            },
+//            "dataSrc": function (json) {
+//                var return_data = new Array();
+//                for(var i=0;i< json.length; i++){
+//        return_data.push({
+//          'name': json[i].name,
+//          'username'  : '<img src="' + json[i].url + '">',
+//          'email' : json[i].email
+//        })
+//      }
+//      return return_data;
+//    }
+//            },
+//            "columns": [
+//                {title: 'username'},
+//                {title: 'name'},
+//                {title: 'email'},
+//            ]
 
-        });
+//        });
 //        setInterval(function () {
 //            table.ajax.reload();
 //        }, 1000);
@@ -250,7 +242,22 @@ $(document).ready(function () {
         }
     });
 
-
+    function profileAjax(username) {
+        $.ajax({
+            url: "{{url('users/profile/')}}/" + username,
+            dataType: 'text',
+            type: 'get',
+            contentType: 'application/x-www-form-urlencoded',
+            beforeSend: function () {
+            },
+            success: function (data, textStatus, jQxhr) {
+                $('.modal-body').html(data);
+            },
+            error: function (jqXhr, textStatus, errorThrown) {
+                $.alert(errorThrown);
+            }
+        });
+    }
 </script>
 
 @endsection
