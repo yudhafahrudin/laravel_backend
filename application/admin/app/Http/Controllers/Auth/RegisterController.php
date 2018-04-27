@@ -27,9 +27,12 @@ class RegisterController extends Controller {
      */
 
     protected $redirectTo = '/add_user';
-
+    protected static $onlyOriginal = true;
+    
     use RegistersUsers;
     use UploadImage;
+   
+    
 
     public function __construct() {
         parent::__construct();

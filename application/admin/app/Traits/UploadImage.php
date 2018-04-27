@@ -12,7 +12,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Support\Facades\Storage;
 
 trait UploadImage {
-
+    
     protected $pathImage;
     protected $pathImageTemp;
     protected $pathQuality = [];
@@ -21,6 +21,7 @@ trait UploadImage {
     protected $backgroundCanvas;
 
     public function saveImage($request) {
+
         $photo = $request->file('photo');
 
         $this->backgroundCanvas = \Image::canvas($this->widthSize, $this->heightSize);
@@ -34,6 +35,9 @@ trait UploadImage {
         $this->pathImage = $request->username . '/' . $rand . '/';
         $image_quality = ['original', 'thumb'];
 
+        // Remove thumb if user want to store original only image 
+        if (static::$onlyOriginal) array_pop($image_quality);
+        
         foreach ($image_quality as $value) {
             $fullPath = $this->pathImageTemp . $this->pathImage . $value . '/';
             // Generating save temp image
@@ -42,7 +46,7 @@ trait UploadImage {
             // Make directory
 //            $this->makeDirectory($fullPath);
 //            $fileImage = $thumbImg->save($fullPath . $imagename);
-            $thumbImg->stream(); 
+            $thumbImg->stream();
 //            // Save to storage disk
             \Storage::disk('public')->put($fullPath . $imagename, $thumbImg);
 //            // Path quality
