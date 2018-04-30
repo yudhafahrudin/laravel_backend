@@ -119,9 +119,6 @@
                                                 </div>
                                             </div>
                                         </form>
-                                        <button id="testajax" class="btn btn-primary">
-                                            Test ajax
-                                        </button>
                                     </div>
                                 </div>
                             </div>

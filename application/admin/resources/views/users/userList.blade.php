@@ -45,7 +45,7 @@
                                         <th data-field="action"  >Action</th>
                                     </tr>
                                 </thead>
-<!--                                <tbody>
+                                <tbody>
                                     @foreach ($userAll as $value)
                                     <tr>
                                         <td>{{$listNomor++}}</td>
@@ -59,7 +59,7 @@
                                     </tr>
                                     @endforeach
 
-                                </tbody>-->
+                                </tbody>
                                 <tfoot>
                                     <tr>
                                         <th data-field="id">No</th>
@@ -68,7 +68,7 @@
                                         <th data-field="email" >Email</th>
                                         <th data-field="action"  >Action</th>
                                     </tr>
-                                </tfoot>>
+                                </tfoot>
                             </table>
 
                         </div>
