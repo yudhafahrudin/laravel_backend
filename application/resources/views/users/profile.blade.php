@@ -92,7 +92,7 @@
                                             <div class="form-group">
                                                 <label class="col-md-12">Username</label>
                                                 <div class="col-md-12">
-                                                    <input disabled type="text" placeholder="{{$userFind->username}}" class="form-control form-control-line"> </div>
+                                                    <input disabled id="username" type="text" value="{{$userFind->username}}" class="form-control form-control-line"> </div>
                                             </div>
                                             <div class="form-group">
                                                 <label class="col-md-12">Name</label>

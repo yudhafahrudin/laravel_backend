@@ -79,7 +79,6 @@
 
 <!-- Scripts -->
 <!--<script src="{{ asset('js/app.js') }}"></script>-->
-<script src="{{ asset('material/admin/js/jquery-3.3.1.min.js') }}"></script>
 <script src="{{ asset('material/admin/js/bootstrap.min.js') }}"></script>
 <!--<script src="{{ asset('material/admin/js/jquery.dataTables.min.js') }}"></script>-->
 <script type="text/javascript" charset="utf8" src="https://cdn.datatables.net/1.10.16/js/jquery.dataTables.js"></script>
@@ -93,15 +92,16 @@
 
 <script type="text/javascript">
 $(document).ready(function () {
-
-    $('#submitDeleteInput').on('click', function (e) {
+    
+    $(document).on('click', 'form#submitDeleteInput', function (e) {
         e.preventDefault();
         $.confirm({
             title: 'Are you sure ?',
             content: 'Delete this user  ',
             buttons: {
                 confirm: function () {
-                    $('#submitDelete').submit();
+                    console.log('asdasdas');
+                    $('form#submitDelete').submit();
                 },
                 cancel: function () {
                     $.alert('Canceled!');
@@ -115,6 +115,7 @@ $(document).ready(function () {
 
     $(document).on('submit', 'form#submitUpdate', function (e) {
         var actionurl = e.currentTarget.action;
+        var username = $("#username").val();
         var name = $("#name").val();
         var email = $("#email").val();
         var description = $("#description").val();
@@ -129,7 +130,8 @@ $(document).ready(function () {
                         actionurl: actionurl,
                         name: name,
                         email: email,
-                        description: description
+                        description: description,
+                        username: username
                     });
                 },
                 cancel: function () {
@@ -158,9 +160,10 @@ $(document).ready(function () {
             data: {name: e.name, email: e.email, description: e.description},
 
             beforeSend: function () {
-//                setInterval(function () {
-//                    $('.modal-content').loading('toggle');
-//                }, 1000);
+                console.log('ads');
+                setInterval(function () {
+                    $('.modal-body').loading('toggle');
+                }, 1000);
             },
             complete: function () {
 //                                $("#loading").hide();
@@ -168,6 +171,7 @@ $(document).ready(function () {
             success: function (data) {
                 notifyMessage(data.status, data.msg);
 //                                $("#data").html("data receieved");
+                profileAJAX(e.username);
             }
         });
     }
@@ -183,7 +187,6 @@ $(document).ready(function () {
             contentType: 'application/x-www-form-urlencoded',
             data: {'username': username},
             beforeSend: function () {
-                console.log('empty modal');
             },
             success: function (data, textStatus, jQxhr) {
 //            $('.modal-body').remove();
@@ -196,61 +199,50 @@ $(document).ready(function () {
     }
 
     $(document).ready(function () {
-//        $('#myTable').DataTable();
-//
-        var table = $('#myTable').DataTable({
-            "processing": true,
-            ajax: {
-                url: 'http://localhost/laravel_backend/public/users',
-            },
-            "columns": [
-                {data: 'username'},
-                {data: 'name'},
-                {data: 'email'},
-            ]
-
-        });
-//        setInterval(function () {
-//            table.ajax.reload();
-//        }, 1000);
-
+        $('#myTable').DataTable();
     });
 
-    $('#myModal').on('shown.bs.modal', function () {
-        $('#myInput').focus()
-    })
 
-    var $imageupload = $('.imageupload');
-    $imageupload.imageupload();
+</script>
+<script type="text/javascript">
+    var ajax_override = {
+        init: function (settings) {
+            ajax_override.config = {
+                url: 'sadasd',
+                type: 'get',
+                contentType: 'application/x-www-form-urlencoded',
+                data: {'username': 'asdas'}
+            };
 
-    $('#imageupload-disable').on('click', function () {
-        $imageupload.imageupload('disable');
-        $(this).blur();
-    })
+            // Allow overriding the default config
+            $.extend(ajax_override.config, settings);
+        },
 
-    $('#imageupload-enable').on('click', function () {
-        $imageupload.imageupload('enable');
-        $(this).blur();
-    })
-
-    $('#imageupload-reset').on('click', function () {
-        $imageupload.imageupload('reset');
-        $(this).blur();
-    });
-
-    function notifyMessage(type, message) {
-        $.notify(
-                message,
-                {position: "top center", className: type}
-        );
-    }
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        run: function (elm) {
+            console.log(elm);
+//            $.ajax({
+//                url: ajax_override.config.url,
+//                type: ajax_override.config.type,
+//                contentType: ajax_override.config.contentType,
+//                data: ajax_override.config.data,
+//                beforeSend: function () {
+//                    console.log('empty modal');
+//                },
+//                success: function (data, textStatus, jQxhr) {
+//                    $(elm).html(data);
+//                },
+//                error: function (jqXhr, textStatus, errorThrown) {
+//                    console.log(errorThrown);
+//                }
+//            });
         }
-    });
+    };
 
-
+    $(document).ready(ajax_override.init({
+        url: "asdasdasadasdas",
+        type: 'get',
+        contentType: 'application/x-www-form-urlencoded',
+    }));
 </script>
 
 @endsection

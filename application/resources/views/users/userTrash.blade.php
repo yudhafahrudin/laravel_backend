@@ -33,7 +33,7 @@
                                         <th>Username</th>
                                         <th>Name</th>
                                         <th>Email</th>
-                                        <!--<th>Action</th>-->
+                                        <th>Action</th>
                                     </tr>
                                 </thead>
                                 <tbody>

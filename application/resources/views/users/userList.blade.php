@@ -54,6 +54,7 @@
                                         <td>{{object_get($value, 'email')}}</td>
                                         <td>
                                             <a href="#" onclick="profileAJAX('{{object_get($value, 'username')}}')" data-toggle="modal" data-target="#exampleModalCenter" ><span class="label label-warning">Detail</span></a>
+                                            <!--<a href="#" onclick="ajax_override.run(this)" data-toggle="modal" userme='asdasdas' data-target="#exampleModalCenter" ><span class="label label-warning">Detail</span></a>-->
 
                                         </td>
                                     </tr>
