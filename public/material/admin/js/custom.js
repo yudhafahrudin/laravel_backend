@@ -1,6 +1,3 @@
-//$('#calendar').datepicker({
-//		});
-
 (window.jQuery);
 $(window).on('resize', function () {
     if ($(window).width() > 768)
@@ -10,7 +7,6 @@ $(window).on('resize', function () {
     if ($(window).width() <= 767)
         $('#sidebar-collapse').collapse('hide')
 })
-
 $(document).on('click', '.panel-heading span.clickable', function (e) {
     var $this = $(this);
     if (!$this.hasClass('panel-collapsed')) {
@@ -24,3 +20,43 @@ $(document).on('click', '.panel-heading span.clickable', function (e) {
     }
 })
 
+// Set header CSRF
+$.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
+// Notification message
+ function notifyMessage(type, message) {
+        $.notify(
+                message,
+                {position: "top center", className: type}
+        );
+    }
+    
+// Image BOX for upload
+var $imageupload = $('.imageupload');
+    $imageupload.imageupload();
+
+    $('#imageupload-disable').on('click', function () {
+        $imageupload.imageupload('disable');
+        $(this).blur();
+    })
+
+    $('#imageupload-enable').on('click', function () {
+        $imageupload.imageupload('enable');
+        $(this).blur();
+    })
+
+    $('#imageupload-reset').on('click', function () {
+        $imageupload.imageupload('reset');
+        $(this).blur();
+    });
+    
+// Modal
+    $('#myModal').on('shown.bs.modal', function () {
+        $('#myInput').focus()
+    })
+
+    
